@@ -19,15 +19,23 @@ Then open http://localhost:8080
 
 ## Deploying
 
-Currently deployed to Netlify at https://bright-beijinho-c324d9.netlify.app
+Live at https://bright-beijinho-c324d9.netlify.app
 
-To deploy manually:
+Auto-deploy is wired up via Netlify. Every push to `main` triggers a new production build within ~10 seconds. No manual deploy commands needed — just:
 
 ```bash
-npx netlify-cli deploy --dir=. --prod --site=5c997035-66b7-4291-ad33-10b57b191c8b
+git add .
+git commit -m "your change"
+git push
 ```
 
-(Requires `NETLIFY_AUTH_TOKEN` environment variable.)
+## Working from another computer
+
+```bash
+git clone https://github.com/camjtimmer/timmer-partners-site.git
+cd timmer-partners-site
+python3 -m http.server 8080  # local preview
+```
 
 ## Notes
 

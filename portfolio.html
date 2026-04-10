@@ -4,369 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investment Portfolio | Timmer Partners</title>
-    <meta name="description" content="Browse the investment portfolio of Timmer Partners - industrial and commercial properties acquired across the United States.">
+    <meta name="description" content="Browse the investment portfolio of Timmer Partners — industrial and commercial properties acquired across 17 states.">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timmerpartners.com/portfolio.html">
+    <meta property="og:title" content="Investment Portfolio | Timmer Partners">
+    <meta property="og:description" content="Industrial and commercial properties acquired by Timmer Partners across 17 states.">
+    <meta property="og:image" content="https://timmerpartners.com/hero-property.jpg">
+    <meta property="og:site_name" content="Timmer Partners">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Investment Portfolio | Timmer Partners">
+    <meta name="twitter:description" content="Industrial and commercial properties across 17 states.">
+    <meta name="twitter:image" content="https://timmerpartners.com/hero-property.jpg">
+
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* ========== RESET & BASE ========== */
-        *, *::before, *::after {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
 
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: #1a1a1a;
-            line-height: 1.6;
-            background: #fff;
-        }
-
-        img {
-            max-width: 100%;
-            display: block;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        /* ========== UTILITIES ========== */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
-
-        .section-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #888;
-            margin-bottom: 16px;
-        }
-
-        .section-heading {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 24px;
-        }
-
-        /* ========== HEADER / NAV ========== */
-        header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-            transition: box-shadow 0.3s;
-        }
-
-        header.scrolled {
-            box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        }
-
-        nav {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 72px;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-        }
-
-        .logo-img {
-            height: 44px;
-            width: auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 36px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #555;
-            transition: color 0.2s;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: #111;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: #111;
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-cta {
-            background: #111;
-            color: #fff !important;
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-weight: 600;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .nav-cta:hover {
-            background: #333;
-            transform: translateY(-1px);
-        }
-
-        .nav-cta::after {
-            display: none !important;
-        }
-
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 8px;
-        }
-
-        .mobile-toggle span {
-            display: block;
-            width: 24px;
-            height: 2px;
-            background: #111;
-            margin: 6px 0;
-            transition: 0.3s;
-        }
-
-        /* ========== HERO BANNER ========== */
-        .portfolio-hero {
-            padding: 160px 0 80px;
-            background: #111;
-            color: #fff;
-            text-align: center;
-        }
-
-        .portfolio-hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 800;
-            letter-spacing: -1.5px;
-            margin-bottom: 16px;
-            line-height: 1.1;
-        }
-
-        .portfolio-hero p {
-            font-size: 1.15rem;
-            color: rgba(255,255,255,0.65);
-            max-width: 640px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        /* ========== PORTFOLIO GRID ========== */
-        .portfolio {
-            padding: 80px 0 120px;
-            background: #fafafa;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 24px;
-        }
-
-        .portfolio-card {
-            position: relative;
-            border-radius: 12px;
-            overflow: hidden;
-            aspect-ratio: 1;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .portfolio-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.18);
-        }
-
-        .portfolio-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.4s;
-        }
-
-        .portfolio-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .portfolio-card-overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-            padding: 24px 16px 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-        }
-
-        .portfolio-card-tenant {
-            font-size: 0.95rem;
-            font-weight: 700;
-            color: #fff;
-            line-height: 1.3;
-        }
-
-        .portfolio-card-location {
-            font-size: 0.8rem;
-            color: rgba(255,255,255,0.7);
-            margin-top: 4px;
-        }
-
-        .portfolio-card-sqft {
-            font-size: 0.72rem;
-            color: #c8902e;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-top: 6px;
-            text-transform: uppercase;
-        }
-
-        .portfolio-card-placeholder {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(135deg, #1e2330 0%, #2a3040 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .portfolio-card-placeholder span {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: rgba(200,144,46,0.5);
-            letter-spacing: 2px;
-        }
-
-        /* ========== FOOTER ========== */
-        footer {
-            padding: 40px 0;
-            background: #0a0a0a;
-            color: rgba(255,255,255,0.4);
-            font-size: 0.85rem;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .footer-logo {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #fff;
-        }
-
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 968px) {
-            .nav-links {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: block;
-            }
-
-            .nav-links.active {
-                display: flex;
-                flex-direction: column;
-                position: absolute;
-                top: 72px;
-                left: 0;
-                right: 0;
-                background: #fff;
-                padding: 24px;
-                gap: 16px;
-                border-bottom: 1px solid #eee;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            }
-
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .footer-content {
-                flex-direction: column;
-                gap: 12px;
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-                max-width: 400px;
-                margin: 0 auto;
-            }
-        }
-
-        /* ========== ANIMATIONS ========== */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+    <!-- Reusable building icon used by placeholder cards -->
+    <svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true">
+        <symbol id="i-building" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18"/>
+            <path d="M5 21V8l7-4 7 4v13"/>
+            <path d="M9 21v-6h6v6"/>
+            <path d="M9 9v.01M12 9v.01M15 9v.01M9 12v.01M12 12v.01M15 12v.01"/>
+        </symbol>
+    </svg>
 
     <!-- HEADER -->
     <header id="header">
         <nav class="container">
-            <a href="index.html" class="logo"><img src="logo-large.png" alt="Timmer Partners" class="logo-img"></a>
+            <a href="index.html" class="logo" aria-label="Timmer Partners home">
+                <img src="logo-large.png" alt="Timmer Partners" class="logo-img">
+            </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#solutions">What We Do</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="index.html#how-it-works">Process</a></li>
                 <li><a href="index.html#testimonials">Testimonials</a></li>
                 <li><a href="index.html#contact" class="nav-cta">Contact Us</a></li>
             </ul>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
+                <span></span><span></span><span></span>
             </button>
         </nav>
     </header>
@@ -375,20 +62,51 @@
     <section class="portfolio-hero">
         <div class="container">
             <div class="fade-up">
-                <span class="section-label" style="color: rgba(255,255,255,0.5);">Portfolio</span>
+                <span class="section-label">Portfolio</span>
                 <h1>Investment Portfolio</h1>
                 <p>A selection of industrial and commercial properties acquired by Timmer Partners across the United States.</p>
+            </div>
+            <div class="portfolio-hero-stats fade-up">
+                <div class="portfolio-hero-stat">
+                    <div class="num" id="psNumProps">54</div>
+                    <div class="lbl">Properties</div>
+                </div>
+                <div class="portfolio-hero-stat">
+                    <div class="num" id="psNumStates">17</div>
+                    <div class="lbl">States</div>
+                </div>
+                <div class="portfolio-hero-stat">
+                    <div class="num" id="psNumSqft">5.2M+</div>
+                    <div class="lbl">Square Feet</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FILTERS -->
+    <section class="portfolio-filters">
+        <div class="container">
+            <div class="portfolio-filters-inner" id="filterChips" role="tablist" aria-label="Filter portfolio by state">
+                <button class="filter-chip active" data-filter="all" role="tab" aria-selected="true">All <span class="count" id="count-all"></span></button>
+                <button class="filter-chip" data-filter="MI" role="tab">Michigan <span class="count" data-count="MI"></span></button>
+                <button class="filter-chip" data-filter="KY" role="tab">Kentucky <span class="count" data-count="KY"></span></button>
+                <button class="filter-chip" data-filter="OH" role="tab">Ohio <span class="count" data-count="OH"></span></button>
+                <button class="filter-chip" data-filter="IN" role="tab">Indiana <span class="count" data-count="IN"></span></button>
+                <button class="filter-chip" data-filter="IL" role="tab">Illinois <span class="count" data-count="IL"></span></button>
+                <button class="filter-chip" data-filter="GA" role="tab">Georgia <span class="count" data-count="GA"></span></button>
+                <button class="filter-chip" data-filter="TX" role="tab">Texas <span class="count" data-count="TX"></span></button>
+                <button class="filter-chip" data-filter="AL" role="tab">Alabama <span class="count" data-count="AL"></span></button>
+                <button class="filter-chip" data-filter="other" role="tab">Other <span class="count" data-count="other"></span></button>
             </div>
         </div>
     </section>
 
     <!-- PORTFOLIO GRID -->
-    <section class="portfolio">
+    <section class="portfolio-page">
         <div class="container">
-            <div class="portfolio-grid">
+            <div class="portfolio-grid" id="portfolioGrid">
 
-
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_bb18edcfa64f406f9feff317ea3e29ba~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_bb18edcfa64f406f9feff317ea3e29ba~mv2.png" alt="Advanced Interiors - Byron Center, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Advanced Interiors</div>
@@ -397,7 +115,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_c25db18256cc4a4b9e8a325c179495df~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_c25db18256cc4a4b9e8a325c179495df~mv2.png" alt="Aludyne - Howell, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Aludyne</div>
@@ -406,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="OH">
                     <img src="https://static.wixstatic.com/media/940710_c4813bfdd87e4a6781e23632ee3bf81c~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_c4813bfdd87e4a6781e23632ee3bf81c~mv2.jpg" alt="Aunt Millie's - Sidney, OH" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Aunt Millie's</div>
@@ -415,7 +133,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="KY">
                     <img src="https://static.wixstatic.com/media/940710_0f4313af79c84d6790a9193cfce0ab9f~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_0f4313af79c84d6790a9193cfce0ab9f~mv2.jpg" alt="Blue Star Plastics - Lexington, KY" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Blue Star Plastics</div>
@@ -424,25 +142,23 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="AL">
                     <img src="https://static.wixstatic.com/media/940710_12ca93e340a748ff88d5e3afbbddf982~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_12ca93e340a748ff88d5e3afbbddf982~mv2.jpg" alt="Deepwater Port - Mobile, AL" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Deepwater Port</div>
                         <div class="portfolio-card-location">Mobile, AL</div>
-                        
                     </div>
                 </div>
 
                 <div class="portfolio-card fade-up">
-                    <img src="https://static.wixstatic.com/media/940710_2a595f3e411c479082a2f16d39d0a889~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_2a595f3e411c479082a2f16d39d0a889~mv2.jpg" alt="Dual Print - " loading="lazy">
+                    <img src="https://static.wixstatic.com/media/940710_2a595f3e411c479082a2f16d39d0a889~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_2a595f3e411c479082a2f16d39d0a889~mv2.jpg" alt="Dual Print" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Dual Print</div>
-                        <div class="portfolio-card-location"></div>
                         <div class="portfolio-card-sqft">77,424 SF</div>
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_46725d3ad3104596881ebc011d6ad8f2~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_46725d3ad3104596881ebc011d6ad8f2~mv2.jpg" alt="Haerter Stamping - Kentwood, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Haerter Stamping</div>
@@ -451,7 +167,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_abf05f3d89db47f38c6f94580e3dfc2e~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_abf05f3d89db47f38c6f94580e3dfc2e~mv2.png" alt="I-Team North America - Holland, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">I-Team North America</div>
@@ -460,7 +176,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/509ad6_7caea60b7c334a1084b79557df0ed11c~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/509ad6_7caea60b7c334a1084b79557df0ed11c~mv2.jpg" alt="Jedco - Grand Rapids, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Jedco</div>
@@ -469,7 +185,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_491b6ce1930049908a73b3738bf07d4c~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_491b6ce1930049908a73b3738bf07d4c~mv2.jpg" alt="Johnston Boiler - Grand Haven, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Johnston Boiler</div>
@@ -478,16 +194,16 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_d81ea2c9dce941f7ba7191870fd48814~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_d81ea2c9dce941f7ba7191870fd48814~mv2.jpg" alt="Pratt & Whitney - Muskegon, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
-                        <div class="portfolio-card-tenant">Pratt & Whitney</div>
+                        <div class="portfolio-card-tenant">Pratt &amp; Whitney</div>
                         <div class="portfolio-card-location">Muskegon, MI</div>
                         <div class="portfolio-card-sqft">175,000 SF</div>
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="NJ">
                     <img src="https://static.wixstatic.com/media/940710_6e251a87a13048bfbe1cfdc5e24da167~mv2.webp/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_6e251a87a13048bfbe1cfdc5e24da167~mv2.webp" alt="Princetel, Inc. - Hamilton, NJ" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Princetel, Inc.</div>
@@ -496,16 +212,16 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_cc54eee4d8794a8d80de6c1aab4942a4~mv2.jpeg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_cc54eee4d8794a8d80de6c1aab4942a4~mv2.jpeg" alt="Progressive A&E - Grand Rapids, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
-                        <div class="portfolio-card-tenant">Progressive A&E</div>
+                        <div class="portfolio-card-tenant">Progressive A&amp;E</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
                         <div class="portfolio-card-sqft">50,000 SF</div>
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="NH">
                     <img src="https://static.wixstatic.com/media/940710_f30c04fb5cad4b398ca8ca9e3dae89b9~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_f30c04fb5cad4b398ca8ca9e3dae89b9~mv2.jpg" alt="Semigen - Londonderry, NH" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Semigen</div>
@@ -514,7 +230,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_0e58a490721c4b8791f1cf2341773599~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_0e58a490721c4b8791f1cf2341773599~mv2.jpg" alt="Superior Foods - Grand Rapids, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Superior Foods</div>
@@ -523,7 +239,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="IN">
                     <img src="https://static.wixstatic.com/media/940710_ceb2fa5d65ca4136b55f8000adf03b91~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_ceb2fa5d65ca4136b55f8000adf03b91~mv2.jpg" alt="TiedemannBevs - Richmond, IN" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">TiedemannBevs</div>
@@ -532,7 +248,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="KY">
                     <img src="https://static.wixstatic.com/media/940710_70102bb03c20478bb18375c4968a5e72~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_70102bb03c20478bb18375c4968a5e72~mv2.png" alt="Trane Corporation - Louisville, KY" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Trane Corporation</div>
@@ -541,7 +257,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_10d61faa779948b3b938b152b44fd318~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_10d61faa779948b3b938b152b44fd318~mv2.jpg" alt="Transfer Tool Products - Grand Haven, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Transfer Tool Products</div>
@@ -550,7 +266,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="KY">
                     <img src="https://static.wixstatic.com/media/940710_d5c5a657fecd46ed8c690f0138676e58~mv2.png/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_d5c5a657fecd46ed8c690f0138676e58~mv2.png" alt="Tri-Arrows Aluminum - Louisville, KY" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Tri-Arrows Aluminum</div>
@@ -559,7 +275,7 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/509ad6_4c17cd6232e549cab76e2598fe143973~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/509ad6_4c17cd6232e549cab76e2598fe143973~mv2.jpg" alt="VanderWall Bros. - Grand Haven, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">VanderWall Bros.</div>
@@ -568,8 +284,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>AF</span></div>
+                <div class="portfolio-card fade-up" data-state="NY">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Air Flo</div>
                         <div class="portfolio-card-location">Horseheads, NY</div>
@@ -577,8 +293,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>AT</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">American Toys</div>
                         <div class="portfolio-card-location">Walled Lake, MI</div>
@@ -586,8 +302,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>A</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Artiflex</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
@@ -595,8 +311,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>A</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Artiflex</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
@@ -604,8 +320,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>AS</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Automatic Spring</div>
                         <div class="portfolio-card-location">Grand Haven, MI</div>
@@ -613,8 +329,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>AS</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Automatic Spring</div>
                         <div class="portfolio-card-location">Grand Haven, MI</div>
@@ -622,8 +338,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>CL</span></div>
+                <div class="portfolio-card fade-up" data-state="TX">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Charger Logistics</div>
                         <div class="portfolio-card-location">Laredo, TX</div>
@@ -631,8 +347,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>CL</span></div>
+                <div class="portfolio-card fade-up" data-state="TX">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Charger Logistics</div>
                         <div class="portfolio-card-location">Hutchins, TX</div>
@@ -640,8 +356,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>C</span></div>
+                <div class="portfolio-card fade-up" data-state="SC">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Colite</div>
                         <div class="portfolio-card-location">Columbia, SC</div>
@@ -649,8 +365,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>EK</span></div>
+                <div class="portfolio-card fade-up" data-state="IN">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Elring Klinger</div>
                         <div class="portfolio-card-location">Fort Wayne, IN</div>
@@ -658,8 +374,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>ES</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Emergency Services</div>
                         <div class="portfolio-card-location">Muskegon, MI</div>
@@ -667,8 +383,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>G</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Geerpres</div>
                         <div class="portfolio-card-location">Muskegon, MI</div>
@@ -676,8 +392,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>GD/</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Gen Die / Artiflex</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
@@ -685,8 +401,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>GMS</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">GL Metal Stamping</div>
                         <div class="portfolio-card-location">Bridgman, MI</div>
@@ -694,8 +410,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>H</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Healthbridge</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
@@ -703,8 +419,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>JF</span></div>
+                <div class="portfolio-card fade-up" data-state="IN">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Jones Fiber</div>
                         <div class="portfolio-card-location">South Bend, IN</div>
@@ -712,8 +428,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>K</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Kohl's</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
@@ -721,8 +437,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>MM</span></div>
+                <div class="portfolio-card fade-up" data-state="OH">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Major Metals</div>
                         <div class="portfolio-card-location">Mansfield, OH</div>
@@ -730,8 +446,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>MMS</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">MS Metal Solutions</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
@@ -739,8 +455,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>M</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Multi-Tenant</div>
                         <div class="portfolio-card-location">Auburn Hills, MI</div>
@@ -748,8 +464,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>M</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Multi-Tenant</div>
                         <div class="portfolio-card-location">Kalamazoo, MI</div>
@@ -757,8 +473,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>P</span></div>
+                <div class="portfolio-card fade-up" data-state="IL">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Pacesetter</div>
                         <div class="portfolio-card-location">Sauk Village, IL</div>
@@ -766,8 +482,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>P</span></div>
+                <div class="portfolio-card fade-up" data-state="OH">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Pentaflex</div>
                         <div class="portfolio-card-location">Springfield, OH</div>
@@ -775,8 +491,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>PMI</span></div>
+                <div class="portfolio-card fade-up" data-state="OH">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Playtex Manufacturing Inc</div>
                         <div class="portfolio-card-location">Sidney, OH</div>
@@ -784,8 +500,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>RG</span></div>
+                <div class="portfolio-card fade-up" data-state="GA">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Ranews Griffin</div>
                         <div class="portfolio-card-location">Griffin, GA</div>
@@ -793,8 +509,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>RT</span></div>
+                <div class="portfolio-card fade-up" data-state="GA">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Ranews Thomaston</div>
                         <div class="portfolio-card-location">Thomaston, GA</div>
@@ -802,8 +518,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>T</span></div>
+                <div class="portfolio-card fade-up" data-state="TN">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Telos</div>
                         <div class="portfolio-card-location">Caryville, TN</div>
@@ -811,8 +527,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>TP</span></div>
+                <div class="portfolio-card fade-up" data-state="FL">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">TMF Plastics</div>
                         <div class="portfolio-card-location">Bradenton, FL</div>
@@ -820,8 +536,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>TP</span></div>
+                <div class="portfolio-card fade-up" data-state="IL">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">TMF Plastics</div>
                         <div class="portfolio-card-location">Plano, IL</div>
@@ -829,8 +545,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>T</span></div>
+                <div class="portfolio-card fade-up" data-state="MI">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Transcendia</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
@@ -838,8 +554,8 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>WL</span></div>
+                <div class="portfolio-card fade-up" data-state="PA">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">Weaber Lumber</div>
                         <div class="portfolio-card-location">South Annville, PA</div>
@@ -847,74 +563,147 @@
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_cf555216b0864652bed8b66d4984e608~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_cf555216b0864652bed8b66d4984e608~mv2.jpg" alt="1950 Waldorf NW - Grand Rapids, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">1950 Waldorf NW</div>
                         <div class="portfolio-card-location">Grand Rapids, MI</div>
-                        
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
+                <div class="portfolio-card fade-up" data-state="MI">
                     <img src="https://static.wixstatic.com/media/940710_2d2ce7a7f4144bc584b041fa42d7fdc6~mv2.jpg/v1/fill/w_600,h_600,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/940710_2d2ce7a7f4144bc584b041fa42d7fdc6~mv2.jpg" alt="206 Michigan Avenue - Lansing, MI" loading="lazy">
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">206 Michigan Avenue</div>
                         <div class="portfolio-card-location">Lansing, MI</div>
-                        
                     </div>
                 </div>
 
-                <div class="portfolio-card fade-up">
-                    <div class="portfolio-card-placeholder"><span>4RA</span></div>
+                <div class="portfolio-card fade-up" data-state="AL">
+                    <div class="portfolio-card-placeholder"><svg><use href="#i-building"/></svg></div>
                     <div class="portfolio-card-overlay">
                         <div class="portfolio-card-tenant">4121 Rushton Ave</div>
                         <div class="portfolio-card-location">Florence, AL</div>
-                        
                     </div>
                 </div>
+
             </div>
+            <div class="portfolio-empty" id="portfolioEmpty">No properties match this filter.</div>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo"><img src="logo-full.png" alt="Timmer Partners" style="height:40px;width:auto;filter:brightness(10);"></div>
-                <div>&copy; 2026 Timmer Partners. All rights reserved.</div>
+            <div class="footer-grid">
+                <div class="footer-left">
+                    <img src="logo-full.png" alt="Timmer Partners" class="footer-logo-img">
+                    <p>
+                        Grand Rapids, Michigan<br>
+                        <a href="tel:6165816727">616-581-6727</a><br>
+                        <a href="mailto:info@timmerpartners.com">info@timmerpartners.com</a>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <ul class="footer-links">
+                        <li><a href="index.html#solutions">What We Do</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="index.html#how-it-works">Process</a></li>
+                        <li><a href="index.html#testimonials">Testimonials</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@timmerpartners.com">Email Us</a></li>
+                        <li><a href="mailto:info@timmerpartners.com?subject=Deal%20Submission">Submit a Deal</a></li>
+                        <li><a href="tel:6165816727">Call Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div>&copy; 2026 Timmer Partners, LLC. All rights reserved. &nbsp;|&nbsp; <a href="https://logo.dev" target="_blank" rel="noopener">Logos provided by Logo.dev</a></div>
+                <div class="footer-social">
+                    <a href="https://www.linkedin.com/company/timmer-partners" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.339 18.337V9.725h-2.86v8.612h2.86zM6.91 8.546c.916 0 1.488-.607 1.488-1.366-.018-.776-.572-1.366-1.471-1.366-.898 0-1.487.59-1.487 1.366 0 .76.572 1.366 1.453 1.366h.017zm11.428 9.79V13.4c0-2.642-1.41-3.872-3.291-3.872-1.518 0-2.198.835-2.578 1.421v-1.221h-2.86c.038.807 0 8.612 0 8.612h2.86v-4.81c0-.257.018-.514.094-.698.207-.514.677-1.045 1.467-1.045 1.034 0 1.448.788 1.448 1.945v4.608h2.86z"/></svg>
+                    </a>
+                </div>
             </div>
         </div>
     </footer>
 
     <script>
         // Header scroll effect
+        const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
-            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+            header.classList.toggle('scrolled', window.scrollY > 50);
         });
 
         // Mobile menu toggle
-        document.getElementById('mobileToggle').addEventListener('click', () => {
-            document.getElementById('navLinks').classList.toggle('active');
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        mobileToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('active');
+            mobileToggle.setAttribute('aria-expanded', String(isOpen));
         });
-
-        // Close mobile menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
+                navLinks.classList.remove('active');
+                mobileToggle.setAttribute('aria-expanded', 'false');
             });
         });
 
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
+        // Scroll-in animations
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
                 }
             });
         }, { threshold: 0.1 });
+        document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
 
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        // Portfolio filtering
+        const cards = Array.from(document.querySelectorAll('#portfolioGrid .portfolio-card'));
+        const chips = Array.from(document.querySelectorAll('.filter-chip'));
+        const emptyEl = document.getElementById('portfolioEmpty');
+
+        // Compute counts
+        const STATE_CHIPS = ['MI','KY','OH','IN','IL','GA','TX','AL'];
+        const counts = { all: cards.length, other: 0 };
+        STATE_CHIPS.forEach(s => counts[s] = 0);
+        cards.forEach(c => {
+            const st = c.dataset.state;
+            if (st && counts.hasOwnProperty(st)) counts[st]++;
+            else counts.other++;
+        });
+        document.getElementById('count-all').textContent = counts.all;
+        document.querySelectorAll('[data-count]').forEach(el => {
+            const k = el.dataset.count;
+            el.textContent = counts[k] || 0;
+        });
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-selected', 'false'); });
+                chip.classList.add('active');
+                chip.setAttribute('aria-selected', 'true');
+                const filter = chip.dataset.filter;
+                let visible = 0;
+                cards.forEach(card => {
+                    const st = card.dataset.state || '';
+                    let match = false;
+                    if (filter === 'all') match = true;
+                    else if (filter === 'other') match = !st || !STATE_CHIPS.includes(st);
+                    else match = st === filter;
+                    card.classList.toggle('is-hidden', !match);
+                    if (match) visible++;
+                });
+                emptyEl.classList.toggle('is-visible', visible === 0);
+            });
+        });
     </script>
 
 </body>

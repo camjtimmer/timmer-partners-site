@@ -5,414 +5,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Timmer Partners | Industrial Sale-Leasebacks & Capital Solutions</title>
     <meta name="description" content="Timmer Partners helps industrial business owners unlock equity through sale-leasebacks and creative capital solutions. $600M+ across 17 states.">
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://timmerpartners.com/">
+    <meta property="og:title" content="Timmer Partners | Industrial Sale-Leasebacks & Capital Solutions">
+    <meta property="og:description" content="Unlock the equity in your industrial real estate. $600M+ deployed across 52 transactions in 17 states.">
+    <meta property="og:image" content="https://timmerpartners.com/hero-property.jpg">
+    <meta property="og:site_name" content="Timmer Partners">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Timmer Partners | Industrial Sale-Leasebacks">
+    <meta name="twitter:description" content="Unlock the equity in your industrial real estate. $600M+ across 17 states.">
+    <meta name="twitter:image" content="https://timmerpartners.com/hero-property.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        /* ========== RESET & BASE ========== */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; font-size: 16px; }
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: #1a1a1a;
-            line-height: 1.6;
-            background: #fff;
-        }
-        img { max-width: 100%; display: block; }
-        a { text-decoration: none; color: inherit; }
 
-        /* ========== UTILITIES ========== */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
-        .section-label {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: #888;
-            margin-bottom: 16px;
-        }
-        .section-heading {
-            font-size: clamp(2rem, 4vw, 3rem);
-            font-weight: 800;
-            line-height: 1.15;
-            margin-bottom: 24px;
-        }
+    <link rel="stylesheet" href="styles.css">
 
-        /* ========== HEADER ========== */
-        header {
-            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(0,0,0,0.06);
-            transition: box-shadow 0.3s;
-        }
-        header.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.08); }
-        nav { display: flex; align-items: center; justify-content: space-between; height: 72px; }
-        .logo { display: flex; align-items: center; }
-        .logo-img { height: 44px; width: auto; }
-        .nav-links { display: flex; gap: 36px; list-style: none; }
-        .nav-links a {
-            font-size: 0.9rem; font-weight: 500; color: #555;
-            transition: color 0.2s; position: relative;
-        }
-        .nav-links a:hover { color: #111; }
-        .nav-links a::after {
-            content: ''; position: absolute; bottom: -4px; left: 0;
-            width: 0; height: 2px; background: #111; transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
-        .nav-cta {
-            background: #c8902e; color: #fff !important;
-            padding: 10px 24px; border-radius: 6px; font-weight: 600;
-            transition: background 0.2s, transform 0.2s;
-        }
-        .nav-cta:hover { background: #b07d28; transform: translateY(-1px); }
-        .nav-cta::after { display: none !important; }
-        .mobile-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
-        .mobile-toggle span { display: block; width: 24px; height: 2px; background: #111; margin: 6px 0; transition: 0.3s; }
-
-        /* ========== HERO ========== */
-        .hero {
-            padding: 0; position: relative; overflow: hidden;
-            min-height: 80vh; display: flex; align-items: center;
-        }
-        .hero-bg { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; }
-        .hero-bg img { width: 100%; height: 100%; object-fit: cover; }
-        .hero-bg::after {
-            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(135deg, rgba(20,25,35,0.82) 0%, rgba(20,25,35,0.55) 50%, rgba(20,25,35,0.35) 100%);
-        }
-        .hero-content {
-            max-width: 720px; position: relative; z-index: 1;
-            padding: 160px 0 120px;
-        }
-        .hero-label {
-            display: inline-block; font-size: 0.8rem; font-weight: 600;
-            letter-spacing: 3px; text-transform: uppercase;
-            color: #c8902e; margin-bottom: 24px;
-        }
-        .hero h1 {
-            font-size: clamp(2.5rem, 5.5vw, 4rem);
-            font-weight: 800; line-height: 1.1; letter-spacing: -1.5px;
-            margin-bottom: 28px; color: #fff;
-        }
-        .hero p {
-            font-size: 1.1rem; color: rgba(255,255,255,0.82);
-            line-height: 1.8; margin-bottom: 40px;
-        }
-        .hero-buttons { display: flex; gap: 16px; flex-wrap: wrap; }
-
-        /* ========== BUTTONS ========== */
-        .btn-primary {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: #c8902e; color: #fff; padding: 16px 32px;
-            border-radius: 8px; font-size: 1rem; font-weight: 600;
-            transition: all 0.2s; border: none; cursor: pointer;
-        }
-        .btn-primary:hover {
-            background: #b07d28; transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(200,144,46,0.3);
-        }
-        .btn-secondary {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: transparent; color: #fff; padding: 16px 32px;
-            border-radius: 8px; font-size: 1rem; font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.35); transition: all 0.2s; cursor: pointer;
-        }
-        .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.08); transform: translateY(-2px); }
-        .btn-dark {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: #1e2330; color: #fff; padding: 16px 32px;
-            border-radius: 8px; font-size: 1rem; font-weight: 600;
-            transition: all 0.2s; border: none; cursor: pointer;
-        }
-        .btn-dark:hover { background: #2a3040; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-        .btn-gold {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: #c8902e; color: #fff; padding: 14px 28px;
-            border-radius: 8px; font-size: 0.95rem; font-weight: 600;
-            transition: all 0.2s; border: none; cursor: pointer;
-        }
-        .btn-gold:hover { background: #b07d28; transform: translateY(-2px); }
-
-        /* ========== STATS BAR ========== */
-        .stats-bar { padding: 72px 0; background: #1e2330; color: #fff; }
-        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; text-align: center; }
-        .stat-number {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
-            font-weight: 800; letter-spacing: -2px; line-height: 1; margin-bottom: 8px;
-        }
-        .stat-label {
-            font-size: 0.85rem; font-weight: 500; letter-spacing: 2px;
-            text-transform: uppercase; color: rgba(255,255,255,0.5);
-        }
-
-        /* ========== TENANT MARQUEE ========== */
-        .tenant-marquee {
-            background: #fff; padding: 56px 0 48px;
-            border-bottom: 1px solid #eee;
-            overflow: hidden;
-        }
-        .tenant-marquee-label {
-            text-align: center; font-size: 0.75rem; font-weight: 600;
-            letter-spacing: 2.5px; text-transform: uppercase;
-            color: #888; margin-bottom: 36px;
-        }
-        .tenant-track-wrap {
-            position: relative;
-            mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-            -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
-        }
-        .tenant-track {
-            display: flex; align-items: center; gap: 72px; width: max-content;
-            animation: tenant-scroll 50s linear infinite;
-        }
-        .tenant-track:hover { animation-play-state: paused; }
-        .tenant-logo {
-            height: 56px; width: auto; max-width: 180px;
-            object-fit: contain;
-            filter: grayscale(100%);
-            opacity: 0.6;
-            transition: filter 0.3s, opacity 0.3s;
-            flex-shrink: 0;
-        }
-        .tenant-logo:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-        @keyframes tenant-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* ========== BROKER CALLOUT ========== */
-        .broker-callout { padding: 80px 0; background: #f7f4ef; }
-        .broker-inner {
-            max-width: 800px; margin: 0 auto; text-align: center;
-        }
-        .broker-inner h2 {
-            font-size: 1.8rem; font-weight: 800; margin-bottom: 16px; color: #1e2330;
-        }
-        .broker-inner p {
-            font-size: 1.05rem; color: #555; line-height: 1.8; margin-bottom: 32px;
-        }
-
-        /* ========== CAPITAL SOLUTIONS ========== */
-        .solutions { padding: 120px 0; }
-        .solutions-header { text-align: center; margin-bottom: 64px; }
-        .solutions-header p {
-            font-size: 1.05rem; color: #555; max-width: 700px;
-            margin: 0 auto; line-height: 1.8;
-        }
-        .solutions-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px; }
-        .solution-card {
-            background: #f9f9f9; padding: 36px 28px; border-radius: 12px;
-            border: 1px solid #eee; transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .solution-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
-        .solution-card h3 {
-            font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: #1e2330;
-        }
-        .solution-card p { font-size: 0.95rem; color: #555; line-height: 1.7; }
-        .solution-card-icon {
-            width: 48px; height: 48px; background: #1e2330; border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 20px; font-size: 1.3rem; color: #c8902e;
-        }
-
-        /* ========== HOW IT WORKS ========== */
-        .how-it-works { padding: 120px 0; background: #1e2330; color: #fff; }
-        .how-header { text-align: center; margin-bottom: 72px; }
-        .how-header .section-label { color: #c8902e; }
-        .how-header .section-heading { color: #fff; }
-        .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
-        .step { text-align: center; }
-        .step-number {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 56px; height: 56px; border-radius: 50%;
-            background: rgba(200,144,46,0.15); color: #c8902e;
-            font-size: 1.3rem; font-weight: 800; margin-bottom: 24px;
-            border: 2px solid rgba(200,144,46,0.3);
-        }
-        .step h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 12px; }
-        .step p { font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.7; }
-
-        /* ========== PORTFOLIO PREVIEW ========== */
-        .portfolio { padding: 120px 0; background: #fafafa; }
-        .portfolio-header { text-align: center; margin-bottom: 64px; }
-        .portfolio-header p { font-size: 1.05rem; color: #555; max-width: 600px; margin: 0 auto; }
-        .portfolio-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-        .portfolio-card {
-            position: relative; border-radius: 12px; overflow: hidden;
-            aspect-ratio: 1; cursor: pointer;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .portfolio-card:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.18); }
-        .portfolio-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s; }
-        .portfolio-card:hover img { transform: scale(1.05); }
-        .portfolio-card-overlay {
-            position: absolute; bottom: 0; left: 0; right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 50%, transparent 100%);
-            padding: 24px 16px 16px; display: flex; flex-direction: column; justify-content: flex-end;
-        }
-        .portfolio-card-tenant { font-size: 0.95rem; font-weight: 700; color: #fff; line-height: 1.3; }
-        .portfolio-card-location { font-size: 0.8rem; color: rgba(255,255,255,0.7); margin-top: 4px; }
-        .btn-portfolio {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: #1e2330; color: #fff; padding: 16px 36px;
-            border-radius: 8px; font-size: 1rem; font-weight: 600;
-            transition: all 0.2s; border: none; cursor: pointer;
-        }
-        .btn-portfolio:hover { background: #2a3040; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-
-        /* ========== TESTIMONIALS ========== */
-        .testimonials { padding: 120px 0; background: #fafafa; overflow: hidden; }
-        .testimonials-header { text-align: center; margin-bottom: 64px; }
-        .testimonials-scroll-wrap {
-            position: relative;
-            mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-            -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
-        }
-        .testimonials-track {
-            display: flex; gap: 28px; width: max-content;
-            animation: testimonial-scroll 80s linear infinite;
-        }
-        .testimonials-track:hover { animation-play-state: paused; }
-        .testimonial-card {
-            background: #fff; padding: 36px; border-radius: 16px;
-            border: 1px solid #eee;
-            width: 380px; flex-shrink: 0;
-            display: flex; flex-direction: column;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.08); }
-        .testimonial-stars { color: #c8902e; font-size: 1.1rem; margin-bottom: 20px; letter-spacing: 2px; }
-        .testimonial-quote {
-            font-size: 1rem; color: #444; line-height: 1.75;
-            margin-bottom: 24px; font-style: italic;
-            flex-grow: 1;
-        }
-        .testimonial-author { display: flex; align-items: center; gap: 12px; }
-        .testimonial-avatar {
-            width: 44px; height: 44px; border-radius: 50%;
-            background: #1e2330; color: #fff; display: flex;
-            align-items: center; justify-content: center; font-weight: 700; font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .testimonial-name { font-weight: 700; font-size: 0.95rem; }
-        .testimonial-company { font-size: 0.85rem; color: #888; }
-        @keyframes testimonial-scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* ========== TEAM ========== */
-        .team { padding: 120px 0; background: #fafafa; }
-        .team-header { text-align: center; margin-bottom: 64px; }
-        .team-header p { font-size: 1.1rem; color: #666; max-width: 500px; margin: 0 auto; }
-        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
-        .team-card { text-align: center; }
-        .team-photo {
-            width: 180px; height: 180px; border-radius: 50%;
-            background: #e8e4dd; margin: 0 auto 24px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; font-weight: 800; color: #b0a899;
-            border: 4px solid #fff; box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        }
-        .team-name { font-size: 1.25rem; font-weight: 700; margin-bottom: 4px; }
-        .team-title { font-size: 0.9rem; color: #888; font-weight: 500; }
-
-        /* ========== FOOTER CTA ========== */
-        .footer-cta { padding: 100px 0; background: #c8902e; color: #fff; text-align: center; }
-        .footer-cta h2 {
-            font-size: clamp(2rem, 4vw, 2.8rem);
-            font-weight: 800; margin-bottom: 16px; line-height: 1.15;
-        }
-        .footer-cta p { font-size: 1.1rem; color: rgba(255,255,255,0.85); max-width: 600px; margin: 0 auto 36px; line-height: 1.7; }
-        .footer-cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
-        .btn-white {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: #fff; color: #1e2330; padding: 16px 32px;
-            border-radius: 8px; font-size: 1rem; font-weight: 600;
-            transition: all 0.2s; border: none; cursor: pointer;
-        }
-        .btn-white:hover { background: #f0f0f0; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
-        .btn-outline-white {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: transparent; color: #fff; padding: 16px 32px;
-            border-radius: 8px; font-size: 1rem; font-weight: 600;
-            border: 2px solid rgba(255,255,255,0.4); transition: all 0.2s; cursor: pointer;
-        }
-        .btn-outline-white:hover { border-color: #fff; background: rgba(255,255,255,0.1); transform: translateY(-2px); }
-
-        /* ========== FOOTER ========== */
-        footer { padding: 48px 0; background: #141923; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
-        .footer-grid {
-            display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: center;
-        }
-        .footer-left p { margin-top: 16px; line-height: 1.8; }
-        .footer-logo-img { height: 36px; width: auto; filter: brightness(10); }
-        .footer-links { list-style: none; display: flex; gap: 24px; }
-        .footer-links a { color: rgba(255,255,255,0.5); transition: color 0.2s; font-size: 0.85rem; }
-        .footer-links a:hover { color: #fff; }
-        .footer-bottom {
-            margin-top: 32px; padding-top: 24px;
-            border-top: 1px solid rgba(255,255,255,0.08);
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .footer-social a {
-            color: rgba(255,255,255,0.4); margin-left: 16px;
-            transition: color 0.2s; font-size: 1.1rem;
-        }
-        .footer-social a:hover { color: #fff; }
-
-        /* ========== RESPONSIVE ========== */
-        @media (max-width: 968px) {
-            .nav-links { display: none; }
-            .mobile-toggle { display: block; }
-            .nav-links.active {
-                display: flex; flex-direction: column; position: absolute;
-                top: 72px; left: 0; right: 0; background: #fff;
-                padding: 24px; gap: 16px; border-bottom: 1px solid #eee;
-                box-shadow: 0 8px 24px rgba(0,0,0,0.08);
-            }
-            .stats-grid, .steps-grid { grid-template-columns: 1fr; gap: 32px; }
-            .solutions-grid { grid-template-columns: repeat(2, 1fr); }
-            .testimonials-grid, .team-grid { grid-template-columns: 1fr; max-width: 500px; margin: 0 auto; }
-            .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid { grid-template-columns: 1fr; text-align: center; }
-            .footer-links { justify-content: center; }
-            .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
-            .hero { min-height: 70vh; }
-        }
-        @media (max-width: 600px) {
-            .hero h1 { letter-spacing: -1px; }
-            .hero-buttons { flex-direction: column; }
-            .btn-primary, .btn-secondary, .btn-white, .btn-outline-white { justify-content: center; }
-            .solutions-grid { grid-template-columns: 1fr; }
-            .portfolio-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
-            .footer-links { flex-direction: column; gap: 12px; }
-            .footer-cta-buttons { flex-direction: column; align-items: center; }
-        }
-
-        /* ========== ANIMATIONS ========== */
-        .fade-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
-        .fade-up.visible { opacity: 1; transform: translateY(0); }
-    </style>
+    <!-- Schema.org Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Timmer Partners",
+        "url": "https://timmerpartners.com",
+        "logo": "https://timmerpartners.com/logo-large.png",
+        "description": "Industrial sale-leasebacks and creative capital solutions. $600M+ deployed across 17 states.",
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Grand Rapids",
+            "addressRegion": "MI",
+            "addressCountry": "US"
+        },
+        "telephone": "+1-616-581-6727",
+        "email": "info@timmerpartners.com",
+        "sameAs": ["https://www.linkedin.com/company/timmer-partners"]
+    }
+    </script>
 </head>
 <body>
 
     <!-- HEADER -->
     <header id="header">
         <nav class="container">
-            <a href="#" class="logo"><img src="logo-large.png" alt="Timmer Partners" class="logo-img"></a>
+            <a href="#" class="logo" aria-label="Timmer Partners home">
+                <img src="logo-large.png" alt="Timmer Partners" class="logo-img">
+            </a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#solutions">About</a></li>
+                <li><a href="#solutions">What We Do</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="#how-it-works">Process</a></li>
                 <li><a href="#testimonials">Testimonials</a></li>
                 <li><a href="#contact" class="nav-cta">Contact Us</a></li>
             </ul>
-            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu">
+            <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle menu" aria-expanded="false">
                 <span></span><span></span><span></span>
             </button>
         </nav>
@@ -421,16 +74,19 @@
     <!-- HERO -->
     <section class="hero">
         <div class="hero-bg">
-            <img src="hero-property.jpg" alt="Modern industrial property acquired by Timmer Partners">
+            <img src="hero-property.jpg" alt="" aria-hidden="true">
         </div>
         <div class="container">
             <div class="hero-content fade-up">
                 <span class="hero-label">Capital Without Disruption</span>
-                <h1>Keep Your Building. Unlock Your Equity.</h1>
-                <p>Most industrial business owners have millions tied up in real estate they'll never sell &mdash; because selling means moving, and moving means risk. A sale-leaseback changes that. You monetize the building, sign a long-term lease, and stay exactly where you are. Timmer Partners has done this 52 times across 17 states. We know how to get it done.</p>
+                <h1>Keep Your Building.<br><span class="accent">Unlock Your Equity.</span></h1>
+                <p>Most industrial business owners have millions tied up in real estate they'll never sell &mdash; because selling means moving, and moving means risk. A sale-leaseback changes that. You monetize the building, sign a long-term lease, and stay exactly where you are. Timmer Partners has done this 52 times across 17 states.</p>
                 <div class="hero-buttons">
-                    <a href="#how-it-works" class="btn-primary">How a Sale-Leaseback Works &rarr;</a>
-                    <a href="#contact" class="btn-secondary">Talk to Our Team</a>
+                    <a href="#how-it-works" class="btn btn-primary">
+                        See How It Works
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                    </a>
+                    <a href="#contact" class="btn btn-ghost-light">Talk to Our Team</a>
                 </div>
             </div>
         </div>
@@ -439,17 +95,21 @@
     <!-- STATS BAR -->
     <section class="stats-bar">
         <div class="container">
+            <div class="stats-header fade-up">
+                <span class="section-label">By the Numbers</span>
+                <h2>A track record built on closing deals — not promising them.</h2>
+            </div>
             <div class="stats-grid">
                 <div class="stat-item fade-up">
-                    <div class="stat-number">$600M+</div>
-                    <div class="stat-label">Capital Unlocked</div>
+                    <div class="stat-number"><span class="stat-prefix">$</span><span class="counter" data-target="600">0</span><span class="stat-suffix">M+</span></div>
+                    <div class="stat-label">Capital Deployed</div>
                 </div>
                 <div class="stat-item fade-up">
-                    <div class="stat-number">52</div>
+                    <div class="stat-number"><span class="counter" data-target="52">0</span></div>
                     <div class="stat-label">Transactions Closed</div>
                 </div>
                 <div class="stat-item fade-up">
-                    <div class="stat-number">17</div>
+                    <div class="stat-number"><span class="counter" data-target="17">0</span></div>
                     <div class="stat-label">States</div>
                 </div>
             </div>
@@ -457,7 +117,7 @@
     </section>
 
     <!-- TENANT MARQUEE -->
-    <section class="tenant-marquee">
+    <section class="tenant-marquee" aria-label="Trusted tenants">
         <div class="tenant-marquee-label">Trusted by Industry-Leading Tenants</div>
         <div class="tenant-track-wrap">
             <div class="tenant-track">
@@ -477,21 +137,21 @@
                 <img class="tenant-logo" src="https://img.logo.dev/transcendia.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="Transcendia">
                 <img class="tenant-logo" src="https://img.logo.dev/tmfplastics.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="TMF Plastics">
                 <!-- Duplicate for seamless loop -->
-                <img class="tenant-logo" src="https://img.logo.dev/trane.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/chargerlogistics.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/progressiveae.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/prattwhitney.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/kohls.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/auntmillies.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/exide.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/triarrowsaluminum.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/aludyne.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/superiorfoods.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/colite.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/airflo.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/geerpres.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/transcendia.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
-                <img class="tenant-logo" src="https://img.logo.dev/tmfplastics.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="">
+                <img class="tenant-logo" src="https://img.logo.dev/trane.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/chargerlogistics.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/progressiveae.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/prattwhitney.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/kohls.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/auntmillies.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/exide.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/triarrowsaluminum.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/aludyne.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/superiorfoods.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/colite.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/airflo.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/geerpres.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/transcendia.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
+                <img class="tenant-logo" src="https://img.logo.dev/tmfplastics.com?token=pk_X-1ZO13GSgeOoUrIuJ6GMQ&size=400&format=png" alt="" aria-hidden="true">
             </div>
         </div>
     </section>
@@ -502,7 +162,10 @@
             <div class="broker-inner fade-up">
                 <h2>Representing a Client?</h2>
                 <p>We work with brokers nationwide. Bring us an owner-occupied industrial deal and we'll give you a competitive offer within 48 hours. Your commission is always protected.</p>
-                <a href="#contact" class="btn-gold">Submit a Deal &rarr;</a>
+                <a href="#contact" class="btn btn-primary btn-sm">
+                    Submit a Deal
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
             </div>
         </div>
     </section>
@@ -517,22 +180,30 @@
             </div>
             <div class="solutions-grid">
                 <div class="solution-card fade-up">
-                    <div class="solution-card-icon">&#9654;</div>
+                    <div class="solution-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V7l8-4v18"/><path d="M19 21V11l-6-4"/><path d="M9 9v.01M9 12v.01M9 15v.01M9 18v.01"/></svg>
+                    </div>
                     <h3>Direct Acquisition</h3>
                     <p>You sell. We buy. Clean and simple &mdash; ideal for owners ready to monetize and move on, or investors looking to trade.</p>
                 </div>
                 <div class="solution-card fade-up">
-                    <div class="solution-card-icon">&#8635;</div>
+                    <div class="solution-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg>
+                    </div>
                     <h3>Sale-Leaseback</h3>
                     <p>Sell your building, stay as the tenant, and convert your equity into working capital without disrupting your operation.</p>
                 </div>
                 <div class="solution-card fade-up">
-                    <div class="solution-card-icon">&#9878;</div>
+                    <div class="solution-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2"/><circle cx="17" cy="7" r="3"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/></svg>
+                    </div>
                     <h3>Partnership Sale-Leaseback</h3>
-                    <p>Keep ownership in the deal. We buy the real estate, you retain an equity stake, and we split the upside together. Best for owners who believe in the long-term value.</p>
+                    <p>Keep ownership in the deal. We buy the real estate, you retain an equity stake, and we split the upside together.</p>
                 </div>
                 <div class="solution-card fade-up">
-                    <div class="solution-card-icon">&#9733;</div>
+                    <div class="solution-card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    </div>
                     <h3>Debt Solutions</h3>
                     <p>We secure and personally guarantee financing on your behalf, giving you access to better terms than you'd get on your own.</p>
                 </div>
@@ -592,8 +263,11 @@
                     </div>
                 </div>
             </div>
-            <div style="text-align: center; margin-top: 48px;" class="fade-up">
-                <a href="portfolio.html" class="btn-portfolio">View Full Portfolio &rarr;</a>
+            <div class="portfolio-cta fade-up">
+                <a href="portfolio.html" class="btn btn-dark">
+                    View Full Portfolio
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
             </div>
         </div>
     </section>
@@ -635,7 +309,7 @@
             <div class="testimonials-scroll-wrap fade-up">
                 <div class="testimonials-track">
                     <div class="testimonial-card">
-                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <p class="testimonial-quote">"Timmer Partners has shown the highest levels of integrity and fairness."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">S</div>
@@ -646,7 +320,7 @@
                         </div>
                     </div>
                     <div class="testimonial-card">
-                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <p class="testimonial-quote">"The transaction was seamlessly executed &mdash; resulting in an exceptionally fair and favorable outcome for our company."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">D</div>
@@ -657,18 +331,18 @@
                         </div>
                     </div>
                     <div class="testimonial-card">
-                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <p class="testimonial-quote">"They were always pleasant, informative, and professional every step of the way."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">E</div>
                             <div>
                                 <div class="testimonial-name">Edward G.</div>
-                                <div class="testimonial-company">&nbsp;</div>
+                                <div class="testimonial-company">Industrial Property Owner</div>
                             </div>
                         </div>
                     </div>
                     <div class="testimonial-card">
-                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <p class="testimonial-quote">"I wish all my transactions were as seamless as Todd and his team made this one."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">M</div>
@@ -679,7 +353,7 @@
                         </div>
                     </div>
                     <div class="testimonial-card">
-                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <p class="testimonial-quote">"Thank you, thank you, thank you! We appreciate that you did exactly what you said you would do."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">J</div>
@@ -690,7 +364,7 @@
                         </div>
                     </div>
                     <div class="testimonial-card">
-                        <div class="testimonial-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                        <div class="testimonial-stars" aria-label="5 out of 5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
                         <p class="testimonial-quote">"As an investor myself, their professionalism and knowledge is unparalleled."</p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">D</div>
@@ -730,7 +404,7 @@
                             <div class="testimonial-avatar">E</div>
                             <div>
                                 <div class="testimonial-name">Edward G.</div>
-                                <div class="testimonial-company">&nbsp;</div>
+                                <div class="testimonial-company">Industrial Property Owner</div>
                             </div>
                         </div>
                     </div>
@@ -772,15 +446,17 @@
         </div>
     </section>
 
-
     <!-- FOOTER CTA -->
     <section class="footer-cta" id="contact">
         <div class="container">
             <h2 class="fade-up">Ready to Put Your Real Estate to Work?</h2>
             <p class="fade-up">Whether you're a business owner exploring your options or a broker with a deal in hand, we'd love to hear from you.</p>
             <div class="footer-cta-buttons fade-up">
-                <a href="mailto:info@timmerpartners.com" class="btn-white">Get in Touch &rarr;</a>
-                <a href="mailto:info@timmerpartners.com?subject=Deal%20Submission" class="btn-outline-white">Submit a Deal</a>
+                <a href="mailto:info@timmerpartners.com" class="btn btn-white">
+                    Get in Touch
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+                </a>
+                <a href="mailto:info@timmerpartners.com?subject=Deal%20Submission" class="btn btn-outline-white">Submit a Deal</a>
             </div>
         </div>
     </section>
@@ -791,23 +467,36 @@
             <div class="footer-grid">
                 <div class="footer-left">
                     <img src="logo-full.png" alt="Timmer Partners" class="footer-logo-img">
-                    <p>Grand Rapids, Michigan<br>
-                    <a href="tel:6165816727" style="color:rgba(255,255,255,0.5);">616-581-6727</a> &nbsp;|&nbsp;
-                    <a href="mailto:info@timmerpartners.com" style="color:rgba(255,255,255,0.5);">info@timmerpartners.com</a></p>
+                    <p>
+                        Grand Rapids, Michigan<br>
+                        <a href="tel:6165816727">616-581-6727</a><br>
+                        <a href="mailto:info@timmerpartners.com">info@timmerpartners.com</a>
+                    </p>
                 </div>
-                <div>
+                <div class="footer-col">
+                    <h4>Company</h4>
                     <ul class="footer-links">
-                        <li><a href="#solutions">About</a></li>
+                        <li><a href="#solutions">What We Do</a></li>
                         <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="#how-it-works">Process</a></li>
                         <li><a href="#testimonials">Testimonials</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Get in Touch</h4>
+                    <ul class="footer-links">
+                        <li><a href="mailto:info@timmerpartners.com">Email Us</a></li>
+                        <li><a href="mailto:info@timmerpartners.com?subject=Deal%20Submission">Submit a Deal</a></li>
+                        <li><a href="tel:6165816727">Call Us</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <div>&copy; 2026 Timmer Partners, LLC. All rights reserved. &nbsp;|&nbsp; <a href="https://logo.dev" target="_blank" rel="noopener" style="color:rgba(255,255,255,0.4);">Logos provided by Logo.dev</a></div>
+                <div>&copy; 2026 Timmer Partners, LLC. All rights reserved. &nbsp;|&nbsp; <a href="https://logo.dev" target="_blank" rel="noopener">Logos provided by Logo.dev</a></div>
                 <div class="footer-social">
-                    <a href="https://www.linkedin.com/company/timmer-partners" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+                    <a href="https://www.linkedin.com/company/timmer-partners" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14zM8.339 18.337V9.725h-2.86v8.612h2.86zM6.91 8.546c.916 0 1.488-.607 1.488-1.366-.018-.776-.572-1.366-1.471-1.366-.898 0-1.487.59-1.487 1.366 0 .76.572 1.366 1.453 1.366h.017zm11.428 9.79V13.4c0-2.642-1.41-3.872-3.291-3.872-1.518 0-2.198.835-2.578 1.421v-1.221h-2.86c.038.807 0 8.612 0 8.612h2.86v-4.81c0-.257.018-.514.094-.698.207-.514.677-1.045 1.467-1.045 1.034 0 1.448.788 1.448 1.945v4.608h2.86z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
@@ -815,26 +504,60 @@
 
     <script>
         // Header scroll effect
+        const header = document.getElementById('header');
         window.addEventListener('scroll', () => {
-            document.getElementById('header').classList.toggle('scrolled', window.scrollY > 50);
+            header.classList.toggle('scrolled', window.scrollY > 50);
         });
+
         // Mobile menu toggle
-        document.getElementById('mobileToggle').addEventListener('click', () => {
-            document.getElementById('navLinks').classList.toggle('active');
+        const mobileToggle = document.getElementById('mobileToggle');
+        const navLinks = document.getElementById('navLinks');
+        mobileToggle.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('active');
+            mobileToggle.setAttribute('aria-expanded', String(isOpen));
         });
-        // Close mobile menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
-                document.getElementById('navLinks').classList.remove('active');
+                navLinks.classList.remove('active');
+                mobileToggle.setAttribute('aria-expanded', 'false');
             });
         });
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
+
+        // Scroll-in animations
+        const fadeObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
+                }
             });
         }, { threshold: 0.1 });
-        document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+        document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+
+        // Animated counters
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = parseInt(el.dataset.target, 10);
+                if (reduceMotion) {
+                    el.textContent = target;
+                } else {
+                    const duration = 1600;
+                    const start = performance.now();
+                    const tick = (now) => {
+                        const t = Math.min(1, (now - start) / duration);
+                        const eased = 1 - Math.pow(1 - t, 3);
+                        el.textContent = Math.round(eased * target);
+                        if (t < 1) requestAnimationFrame(tick);
+                    };
+                    requestAnimationFrame(tick);
+                }
+                counterObserver.unobserve(el);
+            });
+        }, { threshold: 0.4 });
+        document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
     </script>
 
 </body>

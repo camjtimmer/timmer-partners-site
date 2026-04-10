@@ -412,6 +412,13 @@ nav {
     animation: tenant-scroll 60s linear infinite;
 }
 .tenant-track:hover { animation-play-state: paused; }
+.tenant-logo-link {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    text-decoration: none;
+    line-height: 0;
+}
 .tenant-logo {
     height: 56px;
     width: auto;
@@ -422,6 +429,7 @@ nav {
     transition: filter var(--t-med), opacity var(--t-med), transform var(--t-med);
     flex-shrink: 0;
 }
+.tenant-logo-link:hover .tenant-logo,
 .tenant-logo:hover {
     filter: grayscale(0%);
     opacity: 1;
@@ -1000,6 +1008,16 @@ footer {
     grid-template-columns: repeat(4, 1fr);
 }
 .portfolio-card.is-hidden { display: none; }
+.portfolio-card.is-highlighted {
+    animation: portfolio-card-highlight 2.4s var(--ease);
+    z-index: 2;
+}
+@keyframes portfolio-card-highlight {
+    0%   { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.0), var(--shadow-sm); transform: translateY(0); }
+    15%  { box-shadow: 0 0 0 6px rgba(201, 162, 39, 0.55), 0 24px 60px -12px rgba(201, 162, 39, 0.45); transform: translateY(-6px); }
+    60%  { box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.35), 0 18px 50px -14px rgba(201, 162, 39, 0.32); transform: translateY(-4px); }
+    100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.0), var(--shadow-sm); transform: translateY(0); }
+}
 .portfolio-empty {
     text-align: center;
     padding: 80px 24px;

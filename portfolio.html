@@ -25,6 +25,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
+    <!-- Leaflet (portfolio map) — load BEFORE styles.css so our overrides win -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -80,6 +83,25 @@
                     <div class="lbl">Square Feet</div>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="portfolio-map-section" aria-label="Portfolio map">
+        <div class="container">
+            <div class="portfolio-map-header fade-up">
+                <span class="section-label">National Footprint</span>
+                <h2>Every property, on the map.</h2>
+                <p>Explore the country we've covered. Hover a pin for the details — click <em>View Property</em> to jump to it below.</p>
+            </div>
+        </div>
+        <div class="portfolio-map-wrap fade-up">
+            <div id="portfolioMap" role="application" aria-label="Map of Timmer Partners portfolio properties"></div>
+            <div class="portfolio-map-legend">
+                <div class="legend-item"><span class="legend-dot"></span><span class="legend-num" id="mapMarkerCount">0</span> Properties</div>
+                <button type="button" class="legend-reset" id="mapReset">Reset View</button>
+            </div>
+            <div class="portfolio-map-hint" aria-hidden="true">Scroll to zoom is off — use <kbd>+</kbd>/<kbd>−</kbd> or pinch on touch</div>
         </div>
     </section>
 
@@ -633,6 +655,7 @@
         </div>
     </footer>
 
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script>
         // Header scroll effect
         const header = document.getElementById('header');
@@ -719,6 +742,146 @@
                 target.classList.add('is-highlighted');
                 setTimeout(() => target.classList.remove('is-highlighted'), 2600);
             }, 250);
+        })();
+
+        // ---------- Portfolio map (Leaflet) ----------
+        (function buildMap() {
+            if (typeof L === 'undefined') return;
+            const mapEl = document.getElementById('portfolioMap');
+            if (!mapEl) return;
+
+            const COORDS = {
+                'Byron Center, MI': [42.8128, -85.7228],
+                'Howell, MI':        [42.6073, -83.9294],
+                'Sidney, OH':        [40.2842, -84.1555],
+                'Lexington, KY':     [38.0406, -84.5037],
+                'Mobile, AL':        [30.6954, -88.0399],
+                'Kentwood, MI':      [42.8694, -85.6447],
+                'Holland, MI':       [42.7875, -86.1089],
+                'Grand Rapids, MI':  [42.9634, -85.6681],
+                'Grand Haven, MI':   [43.0631, -86.2284],
+                'Muskegon, MI':      [43.2342, -86.2484],
+                'Hamilton, NJ':      [40.2298, -74.6896],
+                'Londonderry, NH':   [42.8651, -71.3739],
+                'Richmond, IN':      [39.8289, -84.8902],
+                'Louisville, KY':    [38.2527, -85.7585],
+                'Horseheads, NY':    [42.1689, -76.8252],
+                'Walled Lake, MI':   [42.5375, -83.4810],
+                'Laredo, TX':        [27.5306, -99.4803],
+                'Hutchins, TX':      [32.6479, -96.7136],
+                'Columbia, SC':      [34.0007, -81.0348],
+                'Fort Wayne, IN':    [41.0793, -85.1394],
+                'Bridgman, MI':      [41.9445, -86.5572],
+                'South Bend, IN':    [41.6764, -86.2520],
+                'Mansfield, OH':     [40.7584, -82.5154],
+                'Auburn Hills, MI':  [42.6875, -83.2341],
+                'Kalamazoo, MI':     [42.2917, -85.5872],
+                'Sauk Village, IL':  [41.4878, -87.5681],
+                'Springfield, OH':   [39.9242, -83.8088],
+                'Griffin, GA':       [33.2468, -84.2641],
+                'Thomaston, GA':     [32.8882, -84.3263],
+                'Caryville, TN':     [36.3001, -84.2196],
+                'Bradenton, FL':     [27.4989, -82.5748],
+                'Plano, IL':         [41.6628, -88.5375],
+                'South Annville, PA':[40.3251, -76.5022],
+                'Lansing, MI':       [42.7325, -84.5555],
+                'Florence, AL':      [34.7998, -87.6773]
+            };
+
+            const map = L.map('portfolioMap', {
+                zoomControl: true,
+                scrollWheelZoom: false,
+                attributionControl: false,
+                worldCopyJump: false
+            }).setView([39.5, -89], 4);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                subdomains: 'abcd',
+                maxZoom: 19
+            }).addTo(map);
+
+            L.control.attribution({ position: 'bottomright', prefix: false })
+                .addAttribution('© OpenStreetMap © CARTO')
+                .addTo(map);
+
+            const allCards = Array.from(document.querySelectorAll('#portfolioGrid .portfolio-card'));
+            const points = [];
+            const seen = {};
+
+            allCards.forEach((card, i) => {
+                if (!card.id) card.id = 'pcard-' + i;
+                const loc = card.querySelector('.portfolio-card-location')?.textContent?.trim();
+                if (!loc || !COORDS[loc]) return;
+
+                // Jitter coincident points so all show
+                seen[loc] = (seen[loc] || 0) + 1;
+                const k = seen[loc] - 1;
+                const angle = (k * 72) * (Math.PI / 180);
+                const r = k === 0 ? 0 : 0.05 + (k * 0.015);
+                const lat = COORDS[loc][0] + Math.sin(angle) * r;
+                const lng = COORDS[loc][1] + Math.cos(angle) * r;
+
+                const tenant = card.querySelector('.portfolio-card-tenant')?.textContent?.trim() || '';
+                const sqft = card.querySelector('.portfolio-card-sqft')?.textContent?.trim() || '';
+
+                const icon = L.divIcon({
+                    className: 'tp-marker',
+                    html: '<div class="tp-marker-pin"></div>',
+                    iconSize: [18, 18],
+                    iconAnchor: [9, 9]
+                });
+
+                const marker = L.marker([lat, lng], { icon, riseOnHover: true });
+                const popupHtml =
+                    '<div class="tp-popup">' +
+                        '<div class="tp-popup-tenant">' + tenant + '</div>' +
+                        '<div class="tp-popup-loc">' + loc + '</div>' +
+                        (sqft ? '<div class="tp-popup-sqft">' + sqft + '</div>' : '') +
+                        '<button type="button" class="tp-popup-jump" data-target="' + card.id + '">View Property →</button>' +
+                    '</div>';
+                marker.bindPopup(popupHtml, { offset: [0, -4], closeButton: true, className: 'tp-leaflet-popup' });
+                marker.bindTooltip(tenant, { direction: 'top', offset: [0, -10], className: 'tp-tooltip' });
+                marker.addTo(map);
+                points.push([lat, lng]);
+            });
+
+            if (points.length) {
+                const bounds = L.latLngBounds(points);
+                map.fitBounds(bounds, { padding: [50, 50], maxZoom: 6 });
+            }
+
+            const markerCountEl = document.getElementById('mapMarkerCount');
+            if (markerCountEl) markerCountEl.textContent = points.length;
+
+            document.getElementById('mapReset')?.addEventListener('click', () => {
+                if (!points.length) return;
+                map.flyToBounds(L.latLngBounds(points), { padding: [50, 50], maxZoom: 6, duration: 0.7 });
+            });
+
+            // Wire up "View Property" button inside popups
+            map.on('popupopen', (e) => {
+                const btn = e.popup.getElement().querySelector('.tp-popup-jump');
+                if (!btn) return;
+                btn.addEventListener('click', () => {
+                    const id = btn.dataset.target;
+                    const card = document.getElementById(id);
+                    if (!card) return;
+                    // Reset filter to "All" so the linked card is visible
+                    const allChip = document.querySelector('.filter-chip[data-filter="all"]');
+                    if (allChip && !allChip.classList.contains('active')) allChip.click();
+                    map.closePopup();
+                    setTimeout(() => {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('is-highlighted');
+                        setTimeout(() => card.classList.remove('is-highlighted'), 2600);
+                    }, 200);
+                }, { once: true });
+            });
+
+            // Re-fit bounds when the map enters view (avoids tile sizing issues
+            // for sections that start hidden / off-screen)
+            const ro = new ResizeObserver(() => map.invalidateSize());
+            ro.observe(mapEl);
         })();
     </script>
 

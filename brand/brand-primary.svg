@@ -1,0 +1,20 @@
+<svg viewBox="0 0 1000 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- Warm white background -->
+  <rect width="1000" height="280" fill="#F7F4EE"/>
+
+  <!-- Primary wordmark -->
+  <text x="500" y="150"
+        font-family="'Canela', 'Tiempos Headline', Georgia, 'Times New Roman', serif"
+        font-size="68" font-weight="400" letter-spacing="10"
+        fill="#1F3A2E" text-anchor="middle">TIMMER PARTNERS</text>
+
+  <!-- Signature hairline in rust -->
+  <line x1="340" y1="180" x2="660" y2="180"
+        stroke="#B08D42" stroke-width="1"/>
+
+  <!-- Italic tagline -->
+  <text x="500" y="215"
+        font-family="'Canela', Georgia, serif" font-style="italic"
+        font-size="18" letter-spacing="3"
+        fill="#1F3A2E" text-anchor="middle" opacity="0.7">Industrial Real Estate Capital</text>
+</svg>

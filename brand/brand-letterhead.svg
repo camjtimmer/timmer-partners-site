@@ -1,0 +1,47 @@
+<svg viewBox="0 0 816 550" xmlns="http://www.w3.org/2000/svg">
+  <!-- Paper -->
+  <rect width="816" height="550" fill="#FFFFFF" stroke="#E5E3DF" stroke-width="1"/>
+
+  <!-- Header: centered wordmark at top -->
+  <text x="408" y="95"
+        font-family="'Canela', Georgia, serif"
+        font-size="34" letter-spacing="6"
+        fill="#1F3A2E" text-anchor="middle">TIMMER PARTNERS</text>
+  <line x1="310" y1="115" x2="506" y2="115" stroke="#B08D42" stroke-width="0.8"/>
+  <text x="408" y="140"
+        font-family="'Canela', Georgia, serif" font-style="italic"
+        font-size="13" letter-spacing="2"
+        fill="#1F3A2E" text-anchor="middle" opacity="0.65">Industrial Real Estate Capital</text>
+
+  <!-- Simulated letter body -->
+  <text x="80" y="215"
+        font-family="'Canela', Georgia, serif"
+        font-size="13" fill="#1F3A2E" opacity="0.85">April 10, 2026</text>
+
+  <text x="80" y="260"
+        font-family="'Canela', Georgia, serif"
+        font-size="13" fill="#1F3A2E" opacity="0.85">[Recipient Name]</text>
+  <text x="80" y="278"
+        font-family="'Canela', Georgia, serif"
+        font-size="13" fill="#1F3A2E" opacity="0.85">[Recipient Company]</text>
+  <text x="80" y="296"
+        font-family="'Canela', Georgia, serif"
+        font-size="13" fill="#1F3A2E" opacity="0.85">[Street Address, City, State]</text>
+
+  <text x="80" y="340"
+        font-family="'Canela', Georgia, serif"
+        font-size="13" fill="#1F3A2E" opacity="0.85">Dear [Name],</text>
+
+  <!-- Lorem bars (simulating body text) -->
+  <rect x="80" y="370" width="656" height="6" fill="#1F3A2E" opacity="0.08"/>
+  <rect x="80" y="386" width="620" height="6" fill="#1F3A2E" opacity="0.08"/>
+  <rect x="80" y="402" width="640" height="6" fill="#1F3A2E" opacity="0.08"/>
+  <rect x="80" y="418" width="580" height="6" fill="#1F3A2E" opacity="0.08"/>
+
+  <!-- Footer -->
+  <line x1="80" y1="490" x2="736" y2="490" stroke="#1F3A2E" stroke-width="0.4" opacity="0.3"/>
+  <text x="408" y="514"
+        font-family="'Canela', Georgia, serif"
+        font-size="9" letter-spacing="1"
+        fill="#1F3A2E" text-anchor="middle" opacity="0.6">[Street Address] · [City, State ZIP] · [Phone] · timmerpartners.com</text>
+</svg>

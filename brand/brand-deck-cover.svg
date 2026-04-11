@@ -1,0 +1,38 @@
+<svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
+  <!-- Slate background -->
+  <rect width="1600" height="900" fill="#1F3A2E"/>
+
+  <!-- Top left: category label -->
+  <text x="80" y="100"
+        font-family="'Canela', Georgia, serif"
+        font-size="16" letter-spacing="4"
+        fill="#F7F4EE" opacity="0.5">INVESTOR PRESENTATION</text>
+
+  <!-- Hero wordmark -->
+  <text x="800" y="440"
+        font-family="'Canela', 'Tiempos Headline', Georgia, serif"
+        font-size="96" letter-spacing="14"
+        fill="#F7F4EE" text-anchor="middle">TIMMER PARTNERS</text>
+
+  <!-- Signature hairline -->
+  <line x1="540" y1="480" x2="1060" y2="480"
+        stroke="#B08D42" stroke-width="1.5"/>
+
+  <!-- Tagline -->
+  <text x="800" y="528"
+        font-family="'Canela', Georgia, serif" font-style="italic"
+        font-size="26" letter-spacing="4"
+        fill="#F7F4EE" text-anchor="middle" opacity="0.75">Industrial Real Estate Capital</text>
+
+  <!-- Bottom left: date -->
+  <text x="80" y="830"
+        font-family="'Canela', Georgia, serif"
+        font-size="14" letter-spacing="3"
+        fill="#F7F4EE" opacity="0.5">APRIL 2026</text>
+
+  <!-- Bottom right: confidential -->
+  <text x="1520" y="830"
+        font-family="'Canela', Georgia, serif"
+        font-size="14" letter-spacing="3"
+        fill="#F7F4EE" text-anchor="end" opacity="0.5">CONFIDENTIAL</text>
+</svg>

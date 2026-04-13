@@ -1119,10 +1119,10 @@ footer {
     padding-top: 24px;
     border-top: 1px solid rgba(247, 244, 238, 0.06);
     font-family: var(--font-sans-ui);
-    font-size: 0.62rem;
-    line-height: 1.6;
+    font-size: 0.68rem;
+    line-height: 1.65;
     letter-spacing: 0.01em;
-    color: rgba(247, 244, 238, 0.3);
+    color: rgba(247, 244, 238, 0.45);
     max-width: 860px;
 }
 .footer-disclosures p { margin: 0 0 8px; }

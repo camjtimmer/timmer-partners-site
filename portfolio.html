@@ -86,7 +86,13 @@
                 <button class="filter-chip" data-filter="GA" role="tab">Georgia <span class="count" data-count="GA"></span></button>
                 <button class="filter-chip" data-filter="TX" role="tab">Texas <span class="count" data-count="TX"></span></button>
                 <button class="filter-chip" data-filter="AL" role="tab">Alabama <span class="count" data-count="AL"></span></button>
-                <button class="filter-chip" data-filter="other" role="tab">Other <span class="count" data-count="other"></span></button>
+                <button class="filter-chip" data-filter="NY" role="tab">New York <span class="count" data-count="NY"></span></button>
+                <button class="filter-chip" data-filter="PA" role="tab">Pennsylvania <span class="count" data-count="PA"></span></button>
+                <button class="filter-chip" data-filter="NJ" role="tab">New Jersey <span class="count" data-count="NJ"></span></button>
+                <button class="filter-chip" data-filter="NH" role="tab">New Hampshire <span class="count" data-count="NH"></span></button>
+                <button class="filter-chip" data-filter="SC" role="tab">South Carolina <span class="count" data-count="SC"></span></button>
+                <button class="filter-chip" data-filter="TN" role="tab">Tennessee <span class="count" data-count="TN"></span></button>
+                <button class="filter-chip" data-filter="FL" role="tab">Florida <span class="count" data-count="FL"></span></button>
             </div>
         </div>
     </section>
@@ -671,13 +677,10 @@
         const emptyEl = document.getElementById('portfolioEmpty');
 
         // Compute counts
-        const STATE_CHIPS = ['MI','KY','OH','IN','IL','GA','TX','AL'];
-        const counts = { all: cards.length, other: 0 };
-        STATE_CHIPS.forEach(s => counts[s] = 0);
+        const counts = { all: cards.length };
         cards.forEach(c => {
             const st = c.dataset.state;
-            if (st && counts.hasOwnProperty(st)) counts[st]++;
-            else counts.other++;
+            if (st) counts[st] = (counts[st] || 0) + 1;
         });
         document.getElementById('count-all').textContent = counts.all;
         document.querySelectorAll('[data-count]').forEach(el => {
@@ -694,10 +697,7 @@
                 let visible = 0;
                 cards.forEach(card => {
                     const st = card.dataset.state || '';
-                    let match = false;
-                    if (filter === 'all') match = true;
-                    else if (filter === 'other') match = !st || !STATE_CHIPS.includes(st);
-                    else match = st === filter;
+                    const match = filter === 'all' || st === filter;
                     card.classList.toggle('is-hidden', !match);
                     if (match) visible++;
                 });

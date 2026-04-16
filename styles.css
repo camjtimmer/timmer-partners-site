@@ -561,8 +561,8 @@ nav {
     width: auto;
     max-width: 180px;
     object-fit: contain;
-    filter: grayscale(35%) contrast(0.92) brightness(0.95);
-    opacity: 0.72;
+    filter: none;
+    opacity: 1;
     transition: filter var(--t-med), opacity var(--t-med), transform var(--t-med);
     flex-shrink: 0;
 }

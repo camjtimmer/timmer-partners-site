@@ -692,7 +692,7 @@ nav {
     border-radius: var(--radius-sm);
     overflow: hidden;
     aspect-ratio: 1;
-    cursor: pointer;
+    cursor: default;
     box-shadow: var(--shadow-sm);
     transition: transform var(--t-med), box-shadow var(--t-med);
     background: var(--cream);
@@ -756,36 +756,6 @@ nav {
     margin-top: 64px;
 }
 
-/* Placeholder cards (no photo) */
-.portfolio-card-placeholder {
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle at 30% 30%, rgba(31, 58, 46, 0.08), transparent 60%),
-        linear-gradient(135deg, var(--warm-white) 0%, var(--cream) 50%, var(--warm-white) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-.portfolio-card-placeholder::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-        linear-gradient(rgba(31, 58, 46, 0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(31, 58, 46, 0.04) 1px, transparent 1px);
-    background-size: 28px 28px;
-    pointer-events: none;
-}
-.portfolio-card-placeholder svg {
-    width: 56px;
-    height: 56px;
-    color: var(--forest);
-    opacity: 0.4;
-    position: relative;
-    z-index: 1;
-}
 
 /* ---------- How it works ---------- */
 .how-it-works {

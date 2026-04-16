@@ -5,3 +5,6 @@
 .env.*
 node_modules/
 previews/
+
+# Local Netlify folder
+.netlify

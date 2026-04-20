@@ -1,38 +1,38 @@
 <svg viewBox="0 0 1600 900" xmlns="http://www.w3.org/2000/svg">
-  <!-- Slate background -->
-  <rect width="1600" height="900" fill="#1F3A2E"/>
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300..900;1,300..900&amp;display=swap');
+    </style>
+  </defs>
+  <!-- Forest background -->
+  <rect width="1600" height="900" fill="#16301F"/>
 
-  <!-- Top left: category label -->
-  <text x="80" y="100"
-        font-family="'Canela', Georgia, serif"
-        font-size="16" letter-spacing="4"
-        fill="#F7F4EE" opacity="0.5">INVESTOR PRESENTATION</text>
+  <!-- Large circle-T mark -->
+  <circle cx="800" cy="340" r="100" fill="none" stroke="#F7F4EE" stroke-width="1.5" opacity="0.25"/>
+  <text x="800" y="345"
+        font-family="'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif"
+        font-size="125" font-weight="500"
+        fill="#F7F4EE" text-anchor="middle" dominant-baseline="central">T</text>
 
-  <!-- Hero wordmark -->
-  <text x="800" y="440"
-        font-family="'Canela', 'Tiempos Headline', Georgia, serif"
-        font-size="96" letter-spacing="14"
+  <!-- Wordmark -->
+  <text x="800" y="510"
+        font-family="'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif"
+        font-size="56" font-weight="500" letter-spacing="12"
         fill="#F7F4EE" text-anchor="middle">TIMMER PARTNERS</text>
 
-  <!-- Signature hairline -->
-  <line x1="540" y1="480" x2="1060" y2="480"
-        stroke="#B08D42" stroke-width="1.5"/>
+  <!-- Muted bronze hairline -->
+  <line x1="600" y1="545" x2="1000" y2="545"
+        stroke="#8A6D32" stroke-width="1"/>
 
-  <!-- Tagline -->
-  <text x="800" y="528"
-        font-family="'Canela', Georgia, serif" font-style="italic"
-        font-size="26" letter-spacing="4"
-        fill="#F7F4EE" text-anchor="middle" opacity="0.75">Industrial Real Estate Capital</text>
+  <!-- Subtitle -->
+  <text x="800" y="585"
+        font-family="'Source Serif 4', 'Source Serif Pro', Georgia, serif" font-style="italic"
+        font-size="20" font-weight="400" letter-spacing="4"
+        fill="#F7F4EE" text-anchor="middle" opacity="0.6">Industrial Real Estate Capital</text>
 
-  <!-- Bottom left: date -->
-  <text x="80" y="830"
-        font-family="'Canela', Georgia, serif"
-        font-size="14" letter-spacing="3"
-        fill="#F7F4EE" opacity="0.5">APRIL 2026</text>
-
-  <!-- Bottom right: confidential -->
-  <text x="1520" y="830"
-        font-family="'Canela', Georgia, serif"
-        font-size="14" letter-spacing="3"
-        fill="#F7F4EE" text-anchor="end" opacity="0.5">CONFIDENTIAL</text>
+  <!-- Presentation label -->
+  <text x="800" y="780"
+        font-family="'Source Serif 4', 'Source Serif Pro', Georgia, serif"
+        font-size="13" font-weight="500" letter-spacing="6"
+        fill="#8A6D32" text-anchor="middle" opacity="0.85">INVESTOR PRESENTATION</text>
 </svg>

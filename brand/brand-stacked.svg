@@ -1,20 +1,38 @@
-<svg viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg">
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,300..900;1,300..900&amp;display=swap');
+    </style>
+  </defs>
   <!-- Warm white background -->
-  <rect width="700" height="500" fill="#F7F4EE"/>
+  <rect width="500" height="500" fill="#F7F4EE"/>
+
+  <!-- Circle-T mark centered -->
+  <circle cx="250" cy="160" r="70" fill="#16301F"/>
+  <text x="250" y="163"
+        font-family="'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif"
+        font-size="86" font-weight="500"
+        fill="#F7F4EE" text-anchor="middle" dominant-baseline="central">T</text>
 
   <!-- TIMMER -->
-  <text x="350" y="210"
-        font-family="'Canela', 'Tiempos Headline', Georgia, serif"
-        font-size="90" font-weight="400" letter-spacing="6"
-        fill="#1F3A2E" text-anchor="middle">TIMMER</text>
-
-  <!-- Signature hairline -->
-  <line x1="200" y1="240" x2="500" y2="240"
-        stroke="#B08D42" stroke-width="1"/>
+  <text x="250" y="295"
+        font-family="'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif"
+        font-size="48" font-weight="500" letter-spacing="10"
+        fill="#16301F" text-anchor="middle">TIMMER</text>
 
   <!-- PARTNERS -->
-  <text x="350" y="300"
-        font-family="'Canela', 'Tiempos Headline', Georgia, serif"
-        font-size="46" font-weight="400" letter-spacing="14"
-        fill="#1F3A2E" text-anchor="middle">PARTNERS</text>
+  <text x="250" y="345"
+        font-family="'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif"
+        font-size="48" font-weight="500" letter-spacing="10"
+        fill="#16301F" text-anchor="middle">PARTNERS</text>
+
+  <!-- Muted bronze hairline -->
+  <line x1="175" y1="370" x2="325" y2="370"
+        stroke="#8A6D32" stroke-width="1"/>
+
+  <!-- Tagline -->
+  <text x="250" y="400"
+        font-family="'Source Serif 4', 'Source Serif Pro', Georgia, serif" font-style="italic"
+        font-size="14" font-weight="400" letter-spacing="3"
+        fill="#16301F" text-anchor="middle" opacity="0.7">Industrial Real Estate Capital</text>
 </svg>

@@ -1,21 +1,22 @@
 /* ==========================================================================
    Timmer Partners — shared styles
-   Brand system: Forest · Warm White · Brass · Warm Gray
-   Typography: Fraunces serif (Canela / Tiempos Headline preferred, Georgia fallback)
+   Brand system: Forest · Warm White · Bronze · Warm Gray
+   Typography: Source Serif 4
    ========================================================================== */
 
 /* ---------- Design tokens ---------- */
 :root {
-    /* Brand palette — forest, warm white, brass, warm gray */
-    --forest:      #1F3A2E;
-    --forest-2:    #2A4A3B;
-    --forest-deep: #132219;
+    /* Brand palette — forest, warm white, bronze, warm gray */
+    --forest:      #16301F;
+    --forest-2:    #1F4029;
+    --forest-deep: #0E2015;
+    --ink:         #14251D;
     --warm-white:  #F7F4EE;
     --paper:       #FAFAF8;
     --cream:       #EEE9DC;
-    --brass:       #B08D42;
-    --brass-soft:  rgba(176, 141, 66, 0.14);
-    --brass-border: rgba(176, 141, 66, 0.30);
+    --bronze:      #8A6D32;
+    --bronze-soft: rgba(138, 109, 50, 0.14);
+    --bronze-border: rgba(138, 109, 50, 0.30);
     --warm-gray:   #8A8580;
     --warm-gray-2: #6E6963;
 
@@ -25,27 +26,29 @@
     --bg-cream:    var(--warm-white);
     --ivory:       var(--warm-white);
     --text-1:      var(--forest);
-    --text-2:      rgba(31, 58, 46, 0.82);
+    --text-2:      rgba(22, 48, 31, 0.82);
     --text-3:      var(--warm-gray);
     --text-faint:  rgba(138, 133, 128, 0.72);
     --border:      #E5E3DF;
     --border-strong: #D6D2CA;
 
     /* Legacy aliases — any residual reference still resolves */
+    --brass:       var(--bronze);
+    --brass-soft:  var(--bronze-soft);
+    --brass-border: var(--bronze-border);
     --stone:       var(--paper);
     --stone-2:     var(--warm-white);
     --stone-3:     var(--cream);
-    --ink:         var(--forest);
     --ink-2:       var(--forest-2);
     --muted:       var(--warm-gray);
-    --slate:       var(--brass);
-    --slate-deep:  #8F7334;
-    --slate-soft:  var(--brass-soft);
-    --slate-border: var(--brass-border);
-    --gold:        var(--brass);
-    --gold-hover:  #8F7334;
-    --gold-soft:   var(--brass-soft);
-    --gold-border: var(--brass-border);
+    --slate:       var(--bronze);
+    --slate-deep:  #6F5828;
+    --slate-soft:  var(--bronze-soft);
+    --slate-border: var(--bronze-border);
+    --gold:        var(--bronze);
+    --gold-hover:  #6F5828;
+    --gold-soft:   var(--bronze-soft);
+    --gold-border: var(--bronze-border);
     --navy:        var(--forest);
     --navy-deep:   var(--forest-deep);
     --navy-light:  var(--forest-2);
@@ -57,9 +60,9 @@
     --radius-xl: 18px;
 
     /* Shadows — soft, layered, forest-tinted */
-    --shadow-sm:   0 1px 2px rgba(31, 58, 46, 0.04), 0 2px 6px rgba(31, 58, 46, 0.05);
-    --shadow:      0 2px 6px rgba(31, 58, 46, 0.05), 0 16px 40px -12px rgba(31, 58, 46, 0.12);
-    --shadow-lg:   0 4px 10px rgba(31, 58, 46, 0.06), 0 30px 80px -20px rgba(31, 58, 46, 0.18);
+    --shadow-sm:   0 1px 2px rgba(22, 48, 31, 0.04), 0 2px 6px rgba(22, 48, 31, 0.05);
+    --shadow:      0 2px 6px rgba(22, 48, 31, 0.05), 0 16px 40px -12px rgba(22, 48, 31, 0.12);
+    --shadow-lg:   0 4px 10px rgba(22, 48, 31, 0.06), 0 30px 80px -20px rgba(22, 48, 31, 0.18);
     --shadow-gold: var(--shadow);
 
     /* Motion */
@@ -73,8 +76,8 @@
     --space-section:       clamp(88px, 10vw, 140px);
     --space-section-tight: clamp(64px, 7vw, 100px);
 
-    /* Type stack — Fraunces serif with commercial fallbacks */
-    --font-serif: 'Canela', 'Tiempos Headline', 'Fraunces', Georgia, 'Times New Roman', serif;
+    /* Type stack — Source Serif 4 */
+    --font-serif: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif;
     --font-sans-ui: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
 }
 
@@ -245,12 +248,12 @@ header {
     background: rgba(250, 250, 248, 0.88);
     backdrop-filter: saturate(160%) blur(14px);
     -webkit-backdrop-filter: saturate(160%) blur(14px);
-    border-bottom: 1px solid rgba(31, 58, 46, 0.06);
+    border-bottom: 1px solid rgba(22, 48, 31, 0.06);
     transition: box-shadow var(--t-med), background var(--t-med);
 }
 header.scrolled {
     background: rgba(247, 244, 238, 0.96);
-    box-shadow: 0 1px 2px rgba(31, 58, 46, 0.04), 0 10px 30px -10px rgba(31, 58, 46, 0.14);
+    box-shadow: 0 1px 2px rgba(22, 48, 31, 0.04), 0 10px 30px -10px rgba(22, 48, 31, 0.14);
 }
 nav {
     display: flex;
@@ -259,19 +262,32 @@ nav {
     height: 84px;
 }
 
-/* Wordmark logo — HTML text, not an image */
+/* Circle-T mark + wordmark lockup */
 .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    line-height: 1;
+    transition: opacity var(--t-fast);
+}
+.logo:hover { opacity: 0.85; }
+.logo-mark {
+    width: 38px;
+    height: 38px;
+    flex-shrink: 0;
+    display: block;
+}
+.logo-text {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 4px;
-    line-height: 1;
 }
 .logo-wordmark {
     font-family: var(--font-serif);
-    font-size: 1.15rem;
-    font-weight: 400;
-    letter-spacing: 0.26em;
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.28em;
     color: var(--forest);
     text-transform: uppercase;
 }
@@ -280,7 +296,7 @@ nav {
     width: 100%;
     max-width: 180px;
     height: 1px;
-    background: var(--brass);
+    background: var(--bronze);
 }
 /* Legacy fallback for .logo-img if any slip through */
 .logo-img { height: 36px; width: auto; }
@@ -1020,19 +1036,30 @@ footer {
 .footer-left a { color: rgba(247, 244, 238, 0.7); transition: color var(--t-fast); }
 .footer-left a:hover { color: var(--warm-white); }
 
-/* Footer wordmark logo */
+/* Footer logo — reversed Circle-T mark + wordmark */
 .footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+.footer-logo-mark {
+    width: 42px;
+    height: 42px;
+    flex-shrink: 0;
+    display: block;
+}
+.footer-logo-text {
     display: inline-flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
-    margin-bottom: 6px;
 }
 .footer-logo-wordmark {
     font-family: var(--font-serif);
     font-size: 1.1rem;
-    font-weight: 400;
-    letter-spacing: 0.26em;
+    font-weight: 500;
+    letter-spacing: 0.28em;
     color: var(--warm-white);
     text-transform: uppercase;
 }
@@ -1041,7 +1068,7 @@ footer {
     width: 100%;
     max-width: 180px;
     height: 1px;
-    background: var(--brass);
+    background: var(--bronze);
 }
 .footer-logo-tagline {
     font-family: var(--font-serif);
@@ -1240,10 +1267,10 @@ footer {
     z-index: 2;
 }
 @keyframes portfolio-card-highlight {
-    0%   { box-shadow: 0 0 0 0 rgba(176, 141, 66, 0.0), var(--shadow-sm); transform: translateY(0); }
-    15%  { box-shadow: 0 0 0 5px rgba(176, 141, 66, 0.55), 0 24px 60px -14px rgba(31, 58, 46, 0.35); transform: translateY(-6px); }
-    60%  { box-shadow: 0 0 0 3px rgba(176, 141, 66, 0.35), 0 18px 50px -16px rgba(31, 58, 46, 0.22); transform: translateY(-4px); }
-    100% { box-shadow: 0 0 0 0 rgba(176, 141, 66, 0.0), var(--shadow-sm); transform: translateY(0); }
+    0%   { box-shadow: 0 0 0 0 rgba(138, 109, 50, 0.0), var(--shadow-sm); transform: translateY(0); }
+    15%  { box-shadow: 0 0 0 5px rgba(138, 109, 50, 0.55), 0 24px 60px -14px rgba(22, 48, 31, 0.35); transform: translateY(-6px); }
+    60%  { box-shadow: 0 0 0 3px rgba(138, 109, 50, 0.35), 0 18px 50px -16px rgba(22, 48, 31, 0.22); transform: translateY(-4px); }
+    100% { box-shadow: 0 0 0 0 rgba(138, 109, 50, 0.0), var(--shadow-sm); transform: translateY(0); }
 }
 .portfolio-empty {
     text-align: center;

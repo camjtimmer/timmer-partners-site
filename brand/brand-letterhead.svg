@@ -1,47 +1,80 @@
-<svg viewBox="0 0 816 550" xmlns="http://www.w3.org/2000/svg">
-  <!-- Paper -->
-  <rect width="816" height="550" fill="#FFFFFF" stroke="#E5E3DF" stroke-width="1"/>
+<svg viewBox="0 0 816 1056" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..900;1,8..60,300..900&amp;display=swap');
+      .body { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, 'Times New Roman', serif; font-size: 11px; fill: #16301F; }
+      .body-muted { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif; font-size: 11px; fill: #16301F; opacity: 0.55; }
+      .wordmark { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif; font-weight: 500; fill: #16301F; }
+      .mark-t { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif; font-weight: 500; fill: #F7F4EE; }
+      .footer { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif; font-size: 9px; fill: #8A8580; letter-spacing: 2px; }
+      .spec-label { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif; font-size: 8px; fill: #8A6D32; letter-spacing: 2px; text-transform: uppercase; }
+      .spec-text { font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif; font-size: 8px; fill: #8A8580; letter-spacing: 1px; }
+    </style>
+  </defs>
 
-  <!-- Header: centered wordmark at top -->
-  <text x="408" y="95"
-        font-family="'Canela', Georgia, serif"
-        font-size="34" letter-spacing="6"
-        fill="#1F3A2E" text-anchor="middle">TIMMER PARTNERS</text>
-  <line x1="310" y1="115" x2="506" y2="115" stroke="#B08D42" stroke-width="0.8"/>
-  <text x="408" y="140"
-        font-family="'Canela', Georgia, serif" font-style="italic"
-        font-size="13" letter-spacing="2"
-        fill="#1F3A2E" text-anchor="middle" opacity="0.65">Industrial Real Estate Capital</text>
+  <!-- Page (US Letter at 96dpi) -->
+  <rect width="816" height="1056" fill="#FFFFFF"/>
 
-  <!-- Simulated letter body -->
-  <text x="80" y="215"
-        font-family="'Canela', Georgia, serif"
-        font-size="13" fill="#1F3A2E" opacity="0.85">April 10, 2026</text>
+  <!-- Header: centered circle-T mark + wordmark -->
+  <circle cx="370" cy="80" r="22" fill="#16301F"/>
+  <text x="370" y="82" class="mark-t" font-size="27" text-anchor="middle" dominant-baseline="central">T</text>
 
-  <text x="80" y="260"
-        font-family="'Canela', Georgia, serif"
-        font-size="13" fill="#1F3A2E" opacity="0.85">[Recipient Name]</text>
-  <text x="80" y="278"
-        font-family="'Canela', Georgia, serif"
-        font-size="13" fill="#1F3A2E" opacity="0.85">[Recipient Company]</text>
-  <text x="80" y="296"
-        font-family="'Canela', Georgia, serif"
-        font-size="13" fill="#1F3A2E" opacity="0.85">[Street Address, City, State]</text>
+  <text x="402" y="84" class="wordmark" font-size="20" letter-spacing="5">TIMMER PARTNERS</text>
 
-  <text x="80" y="340"
-        font-family="'Canela', Georgia, serif"
-        font-size="13" fill="#1F3A2E" opacity="0.85">Dear [Name],</text>
+  <!-- Bronze header hairline -->
+  <line x1="80" y1="120" x2="736" y2="120" stroke="#8A6D32" stroke-width="0.5"/>
 
-  <!-- Lorem bars (simulating body text) -->
-  <rect x="80" y="370" width="656" height="6" fill="#1F3A2E" opacity="0.08"/>
-  <rect x="80" y="386" width="620" height="6" fill="#1F3A2E" opacity="0.08"/>
-  <rect x="80" y="402" width="640" height="6" fill="#1F3A2E" opacity="0.08"/>
-  <rect x="80" y="418" width="580" height="6" fill="#1F3A2E" opacity="0.08"/>
+  <!-- Date -->
+  <text x="80" y="180" class="body-muted">April 20, 2026</text>
+
+  <!-- Recipient block -->
+  <text x="80" y="225" class="body">Mr. David Chen</text>
+  <text x="80" y="241" class="body">Chief Executive Officer</text>
+  <text x="80" y="257" class="body">Charger Logistics, Inc.</text>
+  <text x="80" y="273" class="body">1333 West Wintergreen Road</text>
+  <text x="80" y="289" class="body">Hutchins, TX 75141</text>
+
+  <!-- Salutation -->
+  <text x="80" y="340" class="body">Dear David,</text>
+
+  <!-- Body paragraphs - using tspan for line breaks; Source Serif 4 at 11px, ~1.5 leading -->
+  <text x="80" y="380" class="body">
+    <tspan x="80" dy="0">Thank you for the productive conversation last week regarding the Hutchins facility. As</tspan>
+    <tspan x="80" dy="18">discussed, we are pleased to move forward with a Partnership Sale Leaseback structure</tspan>
+    <tspan x="80" dy="18">on the property — a transaction designed to unlock approximately 90% of the building's</tspan>
+    <tspan x="80" dy="18">appraised value in cash while preserving your 50.01% majority ownership, operational</tspan>
+    <tspan x="80" dy="18">control, and long-term optionality.</tspan>
+  </text>
+
+  <text x="80" y="492" class="body">
+    <tspan x="80" dy="0">Based on the independent third-party appraisal of $45.7M and the representative</tspan>
+    <tspan x="80" dy="18">capital structure we reviewed, Timmer Partners would acquire a 49.99% interest in the</tspan>
+    <tspan x="80" dy="18">property-holding LLC, funded by approximately 80% senior bank debt alongside our</tspan>
+    <tspan x="80" dy="18">equity contribution. Charger Logistics would retain its majority stake, execute a long-</tspan>
+    <tspan x="80" dy="18">term Absolute NNN lease as tenant, and hold a standing buyback option exercisable at</tspan>
+    <tspan x="80" dy="18">any time.</tspan>
+  </text>
+
+  <text x="80" y="622" class="body">
+    <tspan x="80" dy="0">Attached you will find a draft Letter of Intent outlining the proposed terms. We would</tspan>
+    <tspan x="80" dy="18">welcome the opportunity to review it with you and your advisors at your convenience.</tspan>
+  </text>
+
+  <text x="80" y="680" class="body">Sincerely,</text>
+
+  <!-- Signature line placeholder (italic script-feel using Source Serif Italic) -->
+  <text x="80" y="730" font-family="'Source Serif 4', Georgia, serif" font-style="italic" font-size="20" fill="#16301F" opacity="0.85">Cameron Timmer</text>
+
+  <text x="80" y="758" class="body">Cameron Timmer</text>
+  <text x="80" y="774" class="body-muted" font-style="italic">Managing Partner</text>
+
+  <!-- Typography note (small, bottom-left corner above footer) -->
+  <line x1="80" y1="960" x2="220" y2="960" stroke="#8A6D32" stroke-width="0.5" opacity="0.5"/>
+  <text x="80" y="978" class="spec-label">TYPEFACE</text>
+  <text x="80" y="994" class="spec-text">Source Serif 4 · 11/16.5 · 400 weight</text>
+  <text x="80" y="1006" class="spec-text">Correspondence &amp; body copy</text>
 
   <!-- Footer -->
-  <line x1="80" y1="490" x2="736" y2="490" stroke="#1F3A2E" stroke-width="0.4" opacity="0.3"/>
-  <text x="408" y="514"
-        font-family="'Canela', Georgia, serif"
-        font-size="9" letter-spacing="1"
-        fill="#1F3A2E" text-anchor="middle" opacity="0.6">[Street Address] · [City, State ZIP] · [Phone] · timmerpartners.com</text>
+  <line x1="80" y1="1020" x2="736" y2="1020" stroke="#8A6D32" stroke-width="0.5"/>
+  <text x="408" y="1042" class="footer" text-anchor="middle">TIMMER PARTNERS  ·  INDUSTRIAL REAL ESTATE CAPITAL  ·  TIMMERPARTNERS.COM</text>
 </svg>

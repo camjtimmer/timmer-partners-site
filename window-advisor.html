@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Window Opening Advisor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        :root {
+            --good:    #2F7D4F;
+            --good-2:  #245F3D;
+            --warn:    #B68021;
+            --warn-2:  #8A6017;
+            --bad:     #A23A2A;
+            --bad-2:   #7E2C1F;
+            --good-bg: rgba(47, 125, 79, 0.10);
+            --warn-bg: rgba(182, 128, 33, 0.12);
+            --bad-bg:  rgba(162, 58, 42, 0.10);
+        }
+        body { background: var(--paper); }
+
+        /* ---- Layout ---- */
+        .adv-shell { padding: 100px 0 80px; }
+        .adv-header { margin-bottom: 36px; }
+        .adv-eyebrow {
+            font-family: var(--font-sans-ui);
+            font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 0.24em; text-transform: uppercase;
+            color: var(--bronze); margin-bottom: 14px;
+        }
+        .adv-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 400; line-height: 1.1;
+            color: var(--forest); letter-spacing: -0.01em;
+        }
+        .adv-sub {
+            margin-top: 12px; max-width: 680px;
+            color: var(--text-2); font-size: 1.02rem;
+        }
+
+        /* ---- Cards ---- */
+        .card {
+            background: #fff; border: 1px solid var(--border);
+            border-radius: var(--radius); box-shadow: var(--shadow-sm);
+            padding: 28px;
+        }
+        .card + .card { margin-top: 24px; }
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.35rem; font-weight: 500;
+            color: var(--forest); margin-bottom: 4px;
+        }
+        .card-sub {
+            font-family: var(--font-sans-ui);
+            font-size: 0.78rem; color: var(--warm-gray-2);
+            letter-spacing: 0.04em;
+        }
+        .card-head { margin-bottom: 22px; }
+
+        /* ---- Verdict hero ---- */
+        .verdict {
+            border-radius: var(--radius-lg);
+            padding: 36px 32px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            border: 1px solid var(--border);
+            background: var(--warm-white);
+        }
+        .verdict.good { background: linear-gradient(135deg, #EAF3EC 0%, #DFEBE2 100%); border-color: rgba(47,125,79,0.25); }
+        .verdict.warn { background: linear-gradient(135deg, #F6EEDA 0%, #EFE3C4 100%); border-color: rgba(182,128,33,0.30); }
+        .verdict.bad  { background: linear-gradient(135deg, #F2DCD7 0%, #E8C9C1 100%); border-color: rgba(162,58,42,0.30); }
+        .verdict-eyebrow {
+            font-family: var(--font-sans-ui);
+            font-size: 0.72rem; font-weight: 700;
+            letter-spacing: 0.28em; text-transform: uppercase;
+            color: var(--warm-gray-2);
+        }
+        .verdict-head {
+            font-family: var(--font-serif);
+            font-size: clamp(2rem, 4.5vw, 3rem);
+            font-weight: 500; line-height: 1.05;
+            color: var(--forest); letter-spacing: -0.01em;
+        }
+        .verdict.good .verdict-head { color: var(--good-2); }
+        .verdict.warn .verdict-head { color: var(--warn-2); }
+        .verdict.bad  .verdict-head { color: var(--bad-2); }
+        .verdict-line {
+            font-size: 1.05rem; color: var(--text-2);
+            max-width: 720px; line-height: 1.55;
+        }
+
+        .reason-list {
+            display: grid; gap: 10px; margin-top: 4px;
+        }
+        .reason {
+            font-family: var(--font-sans-ui);
+            font-size: 0.9rem; line-height: 1.5;
+            display: flex; align-items: flex-start; gap: 10px;
+            color: var(--text-1);
+        }
+        .reason .dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            margin-top: 7px; flex-shrink: 0;
+            background: var(--warm-gray);
+        }
+        .reason.good .dot { background: var(--good); }
+        .reason.warn .dot { background: var(--warn); }
+        .reason.bad  .dot { background: var(--bad); }
+
+        /* ---- Settings form ---- */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
+        }
+        .field { display: flex; flex-direction: column; gap: 6px; }
+        .field label {
+            font-family: var(--font-sans-ui);
+            font-size: 0.72rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase;
+            color: var(--warm-gray-2);
+        }
+        .field .hint {
+            font-family: var(--font-sans-ui);
+            font-size: 0.72rem; color: var(--text-faint);
+            margin-top: 2px;
+        }
+        .field input, .field select {
+            font: inherit;
+            font-family: var(--font-sans-ui);
+            padding: 10px 12px;
+            border: 1px solid var(--border-strong);
+            border-radius: 6px;
+            background: #fff;
+            color: var(--text-1);
+            font-size: 0.95rem;
+            transition: border-color var(--t-fast), box-shadow var(--t-fast);
+        }
+        .field input:focus, .field select:focus {
+            outline: none;
+            border-color: var(--bronze);
+            box-shadow: 0 0 0 3px var(--bronze-soft);
+        }
+        .settings-actions {
+            display: flex; gap: 12px; flex-wrap: wrap;
+            margin-top: 22px; align-items: center;
+        }
+        .btn-action {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--forest); color: var(--warm-white);
+            border: 1px solid var(--forest);
+            padding: 11px 22px; border-radius: 4px;
+            font-family: var(--font-sans-ui);
+            font-size: 0.76rem; font-weight: 600;
+            letter-spacing: 0.16em; text-transform: uppercase;
+            cursor: pointer;
+            transition: background var(--t-fast), transform var(--t-fast);
+        }
+        .btn-action:hover { background: var(--forest-2); transform: translateY(-1px); }
+        .btn-action.ghost {
+            background: transparent; color: var(--forest);
+        }
+        .btn-action.ghost:hover { background: var(--forest); color: var(--warm-white); }
+        .status-line {
+            font-family: var(--font-sans-ui);
+            font-size: 0.78rem; color: var(--warm-gray-2);
+            margin-left: auto;
+        }
+
+        /* ---- Section group headings ---- */
+        .group-title {
+            font-family: var(--font-sans-ui);
+            font-size: 0.7rem; font-weight: 700;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: var(--bronze); margin: 22px 0 12px;
+        }
+        .group-title:first-child { margin-top: 0; }
+
+        /* ---- Hourly strip ---- */
+        .hour-strip {
+            display: grid;
+            grid-template-columns: repeat(24, minmax(54px, 1fr));
+            gap: 4px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        .hour {
+            border-radius: 6px; padding: 10px 4px;
+            text-align: center; cursor: default;
+            font-family: var(--font-sans-ui);
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+            transition: transform var(--t-fast);
+        }
+        .hour:hover { transform: translateY(-2px); }
+        .hour.good { background: var(--good-bg); border-color: rgba(47,125,79,0.30); }
+        .hour.warn { background: var(--warn-bg); border-color: rgba(182,128,33,0.30); }
+        .hour.bad  { background: var(--bad-bg);  border-color: rgba(162,58,42,0.30); }
+        .hour-time { font-size: 0.72rem; font-weight: 600; color: var(--text-2); }
+        .hour-temp { font-size: 0.92rem; font-weight: 600; color: var(--text-1); margin-top: 4px; }
+        .hour-tag  { font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--warm-gray-2); margin-top: 4px; }
+        .hour.good .hour-tag { color: var(--good-2); }
+        .hour.warn .hour-tag { color: var(--warn-2); }
+        .hour.bad  .hour-tag { color: var(--bad-2); }
+
+        .legend {
+            display: flex; gap: 18px; flex-wrap: wrap;
+            font-family: var(--font-sans-ui);
+            font-size: 0.78rem; color: var(--text-2);
+            margin-top: 14px;
+        }
+        .legend-item { display: inline-flex; align-items: center; gap: 8px; }
+        .legend-swatch { width: 12px; height: 12px; border-radius: 3px; }
+        .swatch-good { background: var(--good-bg); border: 1px solid rgba(47,125,79,0.40); }
+        .swatch-warn { background: var(--warn-bg); border: 1px solid rgba(182,128,33,0.40); }
+        .swatch-bad  { background: var(--bad-bg);  border: 1px solid rgba(162,58,42,0.40); }
+
+        /* ---- Metric grid ---- */
+        .metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 14px;
+        }
+        .metric {
+            background: var(--warm-white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 14px 16px;
+        }
+        .metric-label {
+            font-family: var(--font-sans-ui);
+            font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: var(--warm-gray-2);
+        }
+        .metric-val {
+            font-family: var(--font-serif);
+            font-size: 1.5rem; font-weight: 500;
+            color: var(--forest); margin-top: 4px;
+            line-height: 1.1;
+        }
+        .metric-note {
+            font-family: var(--font-sans-ui);
+            font-size: 0.74rem; color: var(--text-3);
+            margin-top: 4px;
+        }
+        .metric.flag-good { border-color: rgba(47,125,79,0.35); background: var(--good-bg); }
+        .metric.flag-warn { border-color: rgba(182,128,33,0.35); background: var(--warn-bg); }
+        .metric.flag-bad  { border-color: rgba(162,58,42,0.35);  background: var(--bad-bg); }
+
+        /* ---- Open slot pill ---- */
+        .slot-strip {
+            display: flex; flex-wrap: wrap; gap: 12px; margin-top: 4px;
+        }
+        .slot {
+            background: var(--good-bg);
+            border: 1px solid rgba(47,125,79,0.30);
+            border-radius: 999px;
+            padding: 10px 18px;
+            font-family: var(--font-sans-ui);
+            font-size: 0.92rem; font-weight: 500;
+            color: var(--good-2);
+        }
+        .slot strong { font-weight: 700; }
+        .slot.none {
+            background: var(--bad-bg);
+            color: var(--bad-2);
+            border-color: rgba(162,58,42,0.30);
+        }
+
+        /* ---- Misc ---- */
+        .small { font-family: var(--font-sans-ui); font-size: 0.78rem; color: var(--text-3); }
+        .error-box {
+            background: var(--bad-bg);
+            border: 1px solid rgba(162,58,42,0.30);
+            color: var(--bad-2);
+            padding: 14px 18px; border-radius: 8px;
+            font-family: var(--font-sans-ui);
+            font-size: 0.92rem;
+            margin-bottom: 16px;
+        }
+        .loading {
+            padding: 60px 20px; text-align: center;
+            color: var(--warm-gray-2);
+            font-family: var(--font-sans-ui);
+        }
+        .footer-note {
+            margin-top: 36px; padding-top: 24px;
+            border-top: 1px solid var(--border);
+            font-family: var(--font-sans-ui);
+            font-size: 0.78rem;
+            color: var(--text-3); line-height: 1.6;
+        }
+        .footer-note a { color: var(--bronze); text-decoration: underline; }
+
+        @media (max-width: 720px) {
+            .adv-shell { padding: 80px 0 60px; }
+            .card { padding: 22px; }
+            .verdict { padding: 28px 22px; }
+            .hour-strip { grid-template-columns: repeat(24, 70px); }
+        }
+    </style>
+</head>
+<body>
+    <main class="adv-shell">
+        <div class="container">
+            <div class="adv-header">
+                <div class="adv-eyebrow">Personal tool</div>
+                <h1 class="adv-title">Window Opening Advisor</h1>
+                <p class="adv-sub">Cross-references your Airthings indoor air with live outdoor weather and air quality to tell you when to open windows for fresh air or free heating/cooling — and when to keep them shut.</p>
+            </div>
+
+            <div id="errors"></div>
+
+            <!-- VERDICT -->
+            <div id="verdictCard" class="verdict warn" style="display:none">
+                <div class="verdict-eyebrow" id="verdictWhen">Right now</div>
+                <div class="verdict-head" id="verdictHead">—</div>
+                <div class="verdict-line" id="verdictLine">—</div>
+                <div class="reason-list" id="reasonList"></div>
+            </div>
+
+            <div id="loading" class="loading">Loading current conditions…</div>
+
+            <!-- BEST OPEN SLOT -->
+            <div class="card" id="slotCard" style="display:none">
+                <div class="card-head">
+                    <div class="card-title">Best windows of opportunity</div>
+                    <div class="card-sub">Longest stretches of good outdoor conditions in the next 24 hours.</div>
+                </div>
+                <div class="slot-strip" id="slotStrip"></div>
+            </div>
+
+            <!-- 24-HOUR STRIP -->
+            <div class="card" id="hourCard" style="display:none">
+                <div class="card-head">
+                    <div class="card-title">Next 24 hours</div>
+                    <div class="card-sub">Hourly outdoor conditions and whether they support opening windows.</div>
+                </div>
+                <div class="hour-strip" id="hourStrip"></div>
+                <div class="legend">
+                    <span class="legend-item"><span class="legend-swatch swatch-good"></span> Open</span>
+                    <span class="legend-item"><span class="legend-swatch swatch-warn"></span> Marginal</span>
+                    <span class="legend-item"><span class="legend-swatch swatch-bad"></span> Keep closed</span>
+                </div>
+            </div>
+
+            <!-- OUTDOOR METRICS -->
+            <div class="card" id="outdoorCard" style="display:none">
+                <div class="card-head">
+                    <div class="card-title">Outdoor right now</div>
+                    <div class="card-sub" id="outdoorSub">—</div>
+                </div>
+                <div class="metrics" id="outdoorMetrics"></div>
+            </div>
+
+            <!-- INDOOR METRICS -->
+            <div class="card" id="indoorCard" style="display:none">
+                <div class="card-head">
+                    <div class="card-title">Your indoor air (Airthings)</div>
+                    <div class="card-sub" id="indoorSub">Update these whenever you check your Airthings dashboard.</div>
+                </div>
+                <div class="metrics" id="indoorMetrics"></div>
+            </div>
+
+            <!-- SETTINGS -->
+            <div class="card">
+                <div class="card-head">
+                    <div class="card-title">Your inputs</div>
+                    <div class="card-sub">Saved locally in your browser. Update when readings change.</div>
+                </div>
+
+                <div class="group-title">Location</div>
+                <div class="settings-grid">
+                    <div class="field">
+                        <label for="lat">Latitude</label>
+                        <input id="lat" type="number" step="0.0001" placeholder="42.9634">
+                    </div>
+                    <div class="field">
+                        <label for="lon">Longitude</label>
+                        <input id="lon" type="number" step="0.0001" placeholder="-85.6681">
+                    </div>
+                    <div class="field">
+                        <label for="zip">US ZIP (optional)</label>
+                        <input id="zip" type="text" inputmode="numeric" placeholder="49506">
+                        <div class="hint">Fills lat/lon automatically.</div>
+                    </div>
+                </div>
+
+                <div class="group-title">Comfort preferences</div>
+                <div class="settings-grid">
+                    <div class="field">
+                        <label for="indoorMin">Min indoor temp (°F)</label>
+                        <input id="indoorMin" type="number" value="66">
+                    </div>
+                    <div class="field">
+                        <label for="indoorMax">Max indoor temp (°F)</label>
+                        <input id="indoorMax" type="number" value="76">
+                    </div>
+                    <div class="field">
+                        <label for="humidityMax">Max humidity (%)</label>
+                        <input id="humidityMax" type="number" value="55">
+                    </div>
+                    <div class="field">
+                        <label for="allergy">Pollen sensitivity</label>
+                        <select id="allergy">
+                            <option value="low">Low — barely notice</option>
+                            <option value="med" selected>Medium</option>
+                            <option value="high">High — bad allergies</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="group-title">Airthings readings</div>
+                <div class="settings-grid">
+                    <div class="field">
+                        <label for="inTemp">Indoor temp (°F)</label>
+                        <input id="inTemp" type="number" step="0.1" placeholder="72">
+                    </div>
+                    <div class="field">
+                        <label for="inRH">Indoor humidity (%)</label>
+                        <input id="inRH" type="number" step="0.1" placeholder="45">
+                    </div>
+                    <div class="field">
+                        <label for="inCO2">CO₂ (ppm)</label>
+                        <input id="inCO2" type="number" step="1" placeholder="700">
+                    </div>
+                    <div class="field">
+                        <label for="inVOC">VOC (ppb)</label>
+                        <input id="inVOC" type="number" step="1" placeholder="150">
+                    </div>
+                    <div class="field">
+                        <label for="inRadon">Radon (pCi/L)</label>
+                        <input id="inRadon" type="number" step="0.1" placeholder="1.5">
+                        <div class="hint">Bq/m³ ÷ 37 ≈ pCi/L</div>
+                    </div>
+                    <div class="field">
+                        <label for="inPM">Indoor PM2.5 (µg/m³)</label>
+                        <input id="inPM" type="number" step="0.1" placeholder="5">
+                    </div>
+                </div>
+
+                <div class="settings-actions">
+                    <button id="saveBtn" class="btn-action">Save &amp; refresh</button>
+                    <button id="locBtn" class="btn-action ghost">Use my location</button>
+                    <span class="status-line" id="savedAt"></span>
+                </div>
+            </div>
+
+            <div class="footer-note">
+                Outdoor data: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a> forecast + air quality (free, no API key). Pollen and US AQI included where available. All Airthings values entered here stay in your browser via <code>localStorage</code> — nothing is sent to a server.
+            </div>
+        </div>
+    </main>
+
+    <script>
+    (function () {
+        'use strict';
+
+        // ---------- Persistence ----------
+        const STORAGE_KEY = 'windowAdvisor.v1';
+        const defaults = {
+            lat: '', lon: '', zip: '',
+            indoorMin: 66, indoorMax: 76, humidityMax: 55,
+            allergy: 'med',
+            inTemp: '', inRH: '', inCO2: '', inVOC: '', inRadon: '', inPM: '',
+            savedAt: null,
+        };
+        let state = Object.assign({}, defaults, loadState());
+
+        function loadState() {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; }
+            catch (_) { return {}; }
+        }
+        function saveState() {
+            state.savedAt = new Date().toISOString();
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+            renderSavedAt();
+        }
+        function renderSavedAt() {
+            const el = document.getElementById('savedAt');
+            if (!state.savedAt) { el.textContent = ''; return; }
+            const d = new Date(state.savedAt);
+            el.textContent = 'Saved ' + d.toLocaleString();
+        }
+
+        // ---------- Form binding ----------
+        const fields = ['lat','lon','zip','indoorMin','indoorMax','humidityMax','allergy',
+                        'inTemp','inRH','inCO2','inVOC','inRadon','inPM'];
+        function readForm() {
+            fields.forEach(f => {
+                const el = document.getElementById(f);
+                if (!el) return;
+                const v = el.value.trim();
+                if (el.type === 'number') state[f] = v === '' ? '' : Number(v);
+                else state[f] = v;
+            });
+        }
+        function writeForm() {
+            fields.forEach(f => {
+                const el = document.getElementById(f);
+                if (!el) return;
+                if (state[f] === '' || state[f] === null || state[f] === undefined) el.value = '';
+                else el.value = state[f];
+            });
+        }
+
+        // ---------- Geolocation helpers ----------
+        async function zipToLatLon(zip) {
+            const r = await fetch(`https://api.zippopotam.us/us/${encodeURIComponent(zip)}`);
+            if (!r.ok) throw new Error('ZIP lookup failed');
+            const j = await r.json();
+            const p = j.places && j.places[0];
+            if (!p) throw new Error('ZIP not found');
+            return { lat: Number(p.latitude), lon: Number(p.longitude),
+                     place: `${p['place name']}, ${p['state abbreviation']}` };
+        }
+        function browserGeolocate() {
+            return new Promise((resolve, reject) => {
+                if (!navigator.geolocation) return reject(new Error('Geolocation not supported'));
+                navigator.geolocation.getCurrentPosition(
+                    pos => resolve({ lat: pos.coords.latitude, lon: pos.coords.longitude }),
+                    err => reject(err),
+                    { enableHighAccuracy: false, timeout: 10000, maximumAge: 600000 }
+                );
+            });
+        }
+        async function reverseLabel(lat, lon) {
+            try {
+                const r = await fetch(`https://geocoding-api.open-meteo.com/v1/reverse?latitude=${lat}&longitude=${lon}&count=1&language=en&format=json`);
+                if (!r.ok) return null;
+                const j = await r.json();
+                const it = j.results && j.results[0];
+                if (!it) return null;
+                return [it.name, it.admin1].filter(Boolean).join(', ');
+            } catch (_) { return null; }
+        }
+
+        // ---------- Open-Meteo fetchers ----------
+        async function fetchWeather(lat, lon) {
+            const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}` +
+                `&current=temperature_2m,relative_humidity_2m,dew_point_2m,apparent_temperature,precipitation,wind_speed_10m,wind_gusts_10m,cloud_cover,is_day,weather_code` +
+                `&hourly=temperature_2m,relative_humidity_2m,dew_point_2m,precipitation_probability,precipitation,wind_speed_10m,wind_gusts_10m,cloud_cover,uv_index,is_day` +
+                `&daily=sunrise,sunset` +
+                `&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=2`;
+            const r = await fetch(url);
+            if (!r.ok) throw new Error('Weather fetch failed');
+            return r.json();
+        }
+        async function fetchAir(lat, lon) {
+            const url = `https://air-quality-api.open-meteo.com/v1/air-quality?latitude=${lat}&longitude=${lon}` +
+                `&current=pm2_5,pm10,ozone,nitrogen_dioxide,sulphur_dioxide,carbon_monoxide,us_aqi,alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen` +
+                `&hourly=pm2_5,pm10,ozone,us_aqi,alder_pollen,birch_pollen,grass_pollen,mugwort_pollen,olive_pollen,ragweed_pollen` +
+                `&timezone=auto&forecast_days=2`;
+            const r = await fetch(url);
+            if (!r.ok) throw new Error('Air quality fetch failed');
+            return r.json();
+        }
+
+        // ---------- Decision engine ----------
+        // Returns { verdict: 'open' | 'marginal' | 'closed', reasons: [{kind, text}], score }
+        function scoreHour(outdoor, indoor, prefs) {
+            const reasons = [];
+            let verdict = 'open';
+
+            // Hard outdoor blockers
+            if (outdoor.pm25 != null && outdoor.pm25 > 35 && (indoor.pm == null || indoor.pm < outdoor.pm25 - 5)) {
+                reasons.push({ kind: 'bad', text: `Outdoor PM2.5 is high (${outdoor.pm25.toFixed(0)} µg/m³).` });
+                verdict = 'closed';
+            } else if (outdoor.pm25 != null && outdoor.pm25 > 20) {
+                reasons.push({ kind: 'warn', text: `Outdoor PM2.5 is moderate (${outdoor.pm25.toFixed(0)} µg/m³).` });
+                if (verdict === 'open') verdict = 'marginal';
+            }
+
+            if (outdoor.usAqi != null) {
+                if (outdoor.usAqi > 150) {
+                    reasons.push({ kind: 'bad', text: `US AQI ${outdoor.usAqi.toFixed(0)} — unhealthy.` });
+                    verdict = 'closed';
+                } else if (outdoor.usAqi > 100) {
+                    reasons.push({ kind: 'warn', text: `US AQI ${outdoor.usAqi.toFixed(0)} — sensitive groups.` });
+                    if (verdict === 'open') verdict = 'marginal';
+                }
+            }
+
+            if (outdoor.ozone != null && outdoor.ozone > 100) {
+                reasons.push({ kind: 'warn', text: `Ozone elevated (${outdoor.ozone.toFixed(0)} µg/m³).` });
+                if (verdict === 'open') verdict = 'marginal';
+            }
+
+            if (outdoor.precipProb != null && outdoor.precipProb >= 60) {
+                reasons.push({ kind: 'bad', text: `Precipitation likely (${outdoor.precipProb}%).` });
+                verdict = 'closed';
+            } else if (outdoor.precip != null && outdoor.precip > 0.02) {
+                reasons.push({ kind: 'bad', text: `Active precipitation (${outdoor.precip.toFixed(2)}″).` });
+                verdict = 'closed';
+            } else if (outdoor.precipProb != null && outdoor.precipProb >= 30) {
+                reasons.push({ kind: 'warn', text: `Rain possible (${outdoor.precipProb}%).` });
+                if (verdict === 'open') verdict = 'marginal';
+            }
+
+            if (outdoor.gust != null && outdoor.gust > 35) {
+                reasons.push({ kind: 'bad', text: `Strong wind gusts (${outdoor.gust.toFixed(0)} mph).` });
+                verdict = 'closed';
+            } else if (outdoor.gust != null && outdoor.gust > 25) {
+                reasons.push({ kind: 'warn', text: `Gusty (${outdoor.gust.toFixed(0)} mph).` });
+                if (verdict === 'open') verdict = 'marginal';
+            }
+
+            // Pollen — only matters if sensitivity is set
+            const pollen = Math.max(
+                outdoor.pollen?.grass || 0,
+                outdoor.pollen?.ragweed || 0,
+                outdoor.pollen?.birch || 0,
+                outdoor.pollen?.alder || 0,
+                outdoor.pollen?.olive || 0,
+                outdoor.pollen?.mugwort || 0,
+            );
+            if (pollen > 0) {
+                const sens = prefs.allergy;
+                const limit = sens === 'high' ? 20 : sens === 'med' ? 60 : 999;
+                if (pollen > limit) {
+                    if (sens === 'high' && pollen > 50) {
+                        reasons.push({ kind: 'bad', text: `Pollen high (${pollen.toFixed(0)} grains/m³) — bad for sensitive lungs.` });
+                        verdict = 'closed';
+                    } else {
+                        reasons.push({ kind: 'warn', text: `Pollen elevated (${pollen.toFixed(0)} grains/m³).` });
+                        if (verdict === 'open') verdict = 'marginal';
+                    }
+                }
+            }
+
+            // Indoor air urgency — these can override "no thermal benefit"
+            let urgentVent = false;
+            const ventOK = outdoor.pm25 == null || outdoor.pm25 < 25;
+            if (indoor.co2 != null && indoor.co2 > 1000 && ventOK) {
+                reasons.push({ kind: 'good', text: `Indoor CO₂ is high (${indoor.co2.toFixed(0)} ppm) — venting will help.` });
+                urgentVent = true;
+            } else if (indoor.co2 != null && indoor.co2 > 800 && ventOK) {
+                reasons.push({ kind: 'warn', text: `Indoor CO₂ creeping up (${indoor.co2.toFixed(0)} ppm).` });
+            }
+            if (indoor.voc != null && indoor.voc > 250 && ventOK) {
+                reasons.push({ kind: 'good', text: `Indoor VOC elevated (${indoor.voc.toFixed(0)} ppb) — venting will help.` });
+                urgentVent = true;
+            }
+            if (indoor.radon != null && indoor.radon > 4 && ventOK) {
+                reasons.push({ kind: 'good', text: `Indoor radon is above EPA action level (${indoor.radon.toFixed(1)} pCi/L) — vent when air is safe.` });
+                urgentVent = true;
+            } else if (indoor.radon != null && indoor.radon > 2 && ventOK) {
+                reasons.push({ kind: 'warn', text: `Indoor radon elevated (${indoor.radon.toFixed(1)} pCi/L).` });
+            }
+
+            // Thermal benefit
+            let thermal = null; // 'cool', 'warm', 'neutral', 'penalty'
+            const targetMin = Number(prefs.indoorMin);
+            const targetMax = Number(prefs.indoorMax);
+            const inT = indoor.temp;
+            const outT = outdoor.temp;
+
+            if (outT != null) {
+                if (inT != null) {
+                    if (inT > targetMax && outT < inT - 2 && outT < targetMax + 2) {
+                        thermal = 'cool';
+                        reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is ${(inT - outT).toFixed(0)}°F cooler than indoor — free cooling.` });
+                    } else if (inT < targetMin && outT > inT + 2 && outT < targetMax) {
+                        thermal = 'warm';
+                        reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is warmer than indoor (${inT.toFixed(0)}°F) — free warming toward your target.` });
+                    } else if (inT >= targetMin && inT <= targetMax && outT >= targetMin && outT <= targetMax) {
+                        thermal = 'neutral';
+                        reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is in your comfort range.` });
+                    } else if (inT <= targetMax && outT > targetMax + 3) {
+                        thermal = 'penalty';
+                        reasons.push({ kind: 'bad', text: `Outdoor ${outT.toFixed(0)}°F would heat you up — you'd lose AC.` });
+                        verdict = 'closed';
+                    } else if (inT >= targetMin && outT < targetMin - 5) {
+                        thermal = 'penalty';
+                        reasons.push({ kind: 'bad', text: `Outdoor ${outT.toFixed(0)}°F would chill you — you'd lose heat.` });
+                        verdict = 'closed';
+                    } else {
+                        thermal = 'neutral';
+                        reasons.push({ kind: 'warn', text: `Outdoor ${outT.toFixed(0)}°F doesn't help your indoor target (${inT.toFixed(0)}°F).` });
+                    }
+                } else {
+                    if (outT >= targetMin && outT <= targetMax) {
+                        thermal = 'neutral';
+                        reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is in your comfort range.` });
+                    } else if (outT > targetMax) {
+                        reasons.push({ kind: 'warn', text: `Outdoor ${outT.toFixed(0)}°F is above your max (${targetMax}°F).` });
+                    } else {
+                        reasons.push({ kind: 'warn', text: `Outdoor ${outT.toFixed(0)}°F is below your min (${targetMin}°F).` });
+                    }
+                }
+            }
+
+            // Humidity load — only matters when bringing in air to cool
+            if (thermal === 'cool' && outdoor.dewPoint != null && outdoor.dewPoint > 65) {
+                reasons.push({ kind: 'warn', text: `Outdoor dew point ${outdoor.dewPoint.toFixed(0)}°F — air feels muggy; AC dehumidifies better.` });
+                if (verdict === 'open') verdict = 'marginal';
+            }
+
+            // Indoor humidity excess: vent dry outdoor air
+            if (indoor.rh != null && outdoor.rh != null && indoor.rh > prefs.humidityMax && outdoor.rh < indoor.rh - 8) {
+                reasons.push({ kind: 'good', text: `Indoor humidity ${indoor.rh.toFixed(0)}% > target — outdoor ${outdoor.rh.toFixed(0)}% will dry it out.` });
+            } else if (indoor.rh != null && outdoor.rh != null && outdoor.rh > 80 && indoor.rh < 50) {
+                reasons.push({ kind: 'warn', text: `Outdoor humidity ${outdoor.rh.toFixed(0)}% will dampen the house.` });
+                if (verdict === 'open') verdict = 'marginal';
+            }
+
+            // Final tilt: urgent vent overrides "marginal" thermal but never overrides closed
+            if (urgentVent && verdict === 'marginal') verdict = 'open';
+
+            // If nothing pushed us to open, and no thermal benefit, and no urgency: marginal at best
+            const hasBenefit = thermal === 'cool' || thermal === 'warm' || urgentVent;
+            if (verdict === 'open' && !hasBenefit && thermal !== 'neutral') verdict = 'marginal';
+
+            return { verdict, reasons };
+        }
+
+        // ---------- Data shape helpers ----------
+        function hourFromIndex(weather, air, i) {
+            const wH = weather.hourly;
+            const aH = air ? air.hourly : null;
+            const findIdx = (arr, time) => arr ? arr.indexOf(time) : -1;
+            const t = wH.time[i];
+            const aIdx = aH ? findIdx(aH.time, t) : -1;
+            return {
+                time: t,
+                temp: wH.temperature_2m?.[i] ?? null,
+                rh: wH.relative_humidity_2m?.[i] ?? null,
+                dewPoint: wH.dew_point_2m?.[i] ?? null,
+                precip: wH.precipitation?.[i] ?? null,
+                precipProb: wH.precipitation_probability?.[i] ?? null,
+                wind: wH.wind_speed_10m?.[i] ?? null,
+                gust: wH.wind_gusts_10m?.[i] ?? null,
+                cloud: wH.cloud_cover?.[i] ?? null,
+                uv: wH.uv_index?.[i] ?? null,
+                isDay: wH.is_day?.[i] ?? null,
+                pm25: aIdx >= 0 ? aH.pm2_5?.[aIdx] : null,
+                pm10: aIdx >= 0 ? aH.pm10?.[aIdx] : null,
+                ozone: aIdx >= 0 ? aH.ozone?.[aIdx] : null,
+                usAqi: aIdx >= 0 ? aH.us_aqi?.[aIdx] : null,
+                pollen: aIdx >= 0 ? {
+                    grass:   aH.grass_pollen?.[aIdx]   ?? 0,
+                    ragweed: aH.ragweed_pollen?.[aIdx] ?? 0,
+                    birch:   aH.birch_pollen?.[aIdx]   ?? 0,
+                    alder:   aH.alder_pollen?.[aIdx]   ?? 0,
+                    olive:   aH.olive_pollen?.[aIdx]   ?? 0,
+                    mugwort: aH.mugwort_pollen?.[aIdx] ?? 0,
+                } : null,
+            };
+        }
+
+        function currentOutdoor(weather, air) {
+            const w = weather.current || {};
+            const ac = air ? air.current : null;
+            return {
+                time: w.time,
+                temp: w.temperature_2m ?? null,
+                rh: w.relative_humidity_2m ?? null,
+                dewPoint: w.dew_point_2m ?? null,
+                apparent: w.apparent_temperature ?? null,
+                precip: w.precipitation ?? null,
+                precipProb: null,
+                wind: w.wind_speed_10m ?? null,
+                gust: w.wind_gusts_10m ?? null,
+                cloud: w.cloud_cover ?? null,
+                isDay: w.is_day ?? null,
+                pm25: ac?.pm2_5 ?? null,
+                pm10: ac?.pm10 ?? null,
+                ozone: ac?.ozone ?? null,
+                no2: ac?.nitrogen_dioxide ?? null,
+                co: ac?.carbon_monoxide ?? null,
+                usAqi: ac?.us_aqi ?? null,
+                pollen: ac ? {
+                    grass:   ac.grass_pollen   ?? 0,
+                    ragweed: ac.ragweed_pollen ?? 0,
+                    birch:   ac.birch_pollen   ?? 0,
+                    alder:   ac.alder_pollen   ?? 0,
+                    olive:   ac.olive_pollen   ?? 0,
+                    mugwort: ac.mugwort_pollen ?? 0,
+                } : null,
+            };
+        }
+
+        function indoorFromState() {
+            const v = k => state[k] === '' || state[k] == null ? null : Number(state[k]);
+            return {
+                temp: v('inTemp'), rh: v('inRH'), co2: v('inCO2'),
+                voc: v('inVOC'), radon: v('inRadon'), pm: v('inPM'),
+            };
+        }
+        function prefsFromState() {
+            return {
+                indoorMin: Number(state.indoorMin) || 66,
+                indoorMax: Number(state.indoorMax) || 76,
+                humidityMax: Number(state.humidityMax) || 55,
+                allergy: state.allergy || 'med',
+            };
+        }
+
+        // ---------- Rendering ----------
+        function setVerdict(verdict, headline, line, reasons) {
+            const card = document.getElementById('verdictCard');
+            card.classList.remove('good','warn','bad');
+            card.classList.add(verdict === 'open' ? 'good' : verdict === 'closed' ? 'bad' : 'warn');
+            card.style.display = '';
+            document.getElementById('verdictHead').textContent = headline;
+            document.getElementById('verdictLine').textContent = line;
+            const list = document.getElementById('reasonList');
+            list.innerHTML = '';
+            reasons.forEach(r => {
+                const row = document.createElement('div');
+                row.className = 'reason ' + (r.kind || '');
+                row.innerHTML = `<span class="dot"></span><span>${escapeHtml(r.text)}</span>`;
+                list.appendChild(row);
+            });
+        }
+
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c =>
+                ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+        }
+
+        function fmtTime(iso, opts = {}) {
+            const d = new Date(iso);
+            return d.toLocaleTimeString([], { hour: 'numeric', ...opts });
+        }
+        function fmtDayTime(iso) {
+            const d = new Date(iso);
+            const now = new Date();
+            const sameDay = d.toDateString() === now.toDateString();
+            const opts = { hour: 'numeric' };
+            return (sameDay ? '' : d.toLocaleDateString([], { weekday: 'short' }) + ' ') + d.toLocaleTimeString([], opts);
+        }
+
+        function renderHourStrip(scored) {
+            const strip = document.getElementById('hourStrip');
+            strip.innerHTML = '';
+            scored.slice(0, 24).forEach(({ hour, result }) => {
+                const div = document.createElement('div');
+                div.className = 'hour ' + (result.verdict === 'open' ? 'good' : result.verdict === 'closed' ? 'bad' : 'warn');
+                const reasonText = result.reasons.slice(0, 3).map(r => '• ' + r.text).join('\n');
+                div.title = reasonText || 'No notes';
+                div.innerHTML = `
+                    <div class="hour-time">${fmtTime(hour.time)}</div>
+                    <div class="hour-temp">${hour.temp != null ? Math.round(hour.temp) + '°' : '—'}</div>
+                    <div class="hour-tag">${result.verdict === 'open' ? 'Open' : result.verdict === 'closed' ? 'Closed' : 'Maybe'}</div>
+                `;
+                strip.appendChild(div);
+            });
+            document.getElementById('hourCard').style.display = '';
+        }
+
+        function renderSlots(scored) {
+            const card = document.getElementById('slotCard');
+            const strip = document.getElementById('slotStrip');
+            strip.innerHTML = '';
+            const slots = [];
+            let cur = null;
+            scored.slice(0, 24).forEach(({ hour, result }) => {
+                if (result.verdict === 'open') {
+                    if (!cur) cur = { start: hour.time, end: hour.time, count: 1 };
+                    else { cur.end = hour.time; cur.count++; }
+                } else {
+                    if (cur) { slots.push(cur); cur = null; }
+                }
+            });
+            if (cur) slots.push(cur);
+            slots.sort((a, b) => b.count - a.count);
+            if (slots.length === 0) {
+                const p = document.createElement('div');
+                p.className = 'slot none';
+                p.textContent = 'No "definitely open" windows in the next 24 hours — conditions are marginal or worse throughout.';
+                strip.appendChild(p);
+            } else {
+                slots.slice(0, 3).forEach(s => {
+                    const endHour = new Date(s.end); endHour.setHours(endHour.getHours() + 1);
+                    const p = document.createElement('div');
+                    p.className = 'slot';
+                    p.innerHTML = `<strong>${fmtDayTime(s.start)} – ${fmtDayTime(endHour.toISOString())}</strong> &nbsp;·&nbsp; ${s.count}h`;
+                    strip.appendChild(p);
+                });
+            }
+            card.style.display = '';
+        }
+
+        function flagForOutdoor(metric, value) {
+            if (value == null) return '';
+            switch (metric) {
+                case 'pm25': return value > 35 ? 'flag-bad' : value > 12 ? 'flag-warn' : 'flag-good';
+                case 'aqi':  return value > 100 ? 'flag-bad' : value > 50 ? 'flag-warn' : 'flag-good';
+                case 'ozone':return value > 100 ? 'flag-bad' : value > 70 ? 'flag-warn' : 'flag-good';
+                case 'gust': return value > 35 ? 'flag-bad' : value > 25 ? 'flag-warn' : '';
+                case 'precip': return value > 0.02 ? 'flag-bad' : '';
+                default: return '';
+            }
+        }
+
+        function renderOutdoor(out, placeLabel) {
+            const sub = placeLabel ? `${placeLabel} · ${new Date(out.time).toLocaleString()}` : new Date(out.time).toLocaleString();
+            document.getElementById('outdoorSub').textContent = sub;
+            const grid = document.getElementById('outdoorMetrics');
+            grid.innerHTML = '';
+            const cards = [
+                ['Temperature',   out.temp != null ? `${out.temp.toFixed(0)}°F` : '—', out.apparent != null ? `Feels ${out.apparent.toFixed(0)}°F` : '', ''],
+                ['Humidity',      out.rh != null ? `${out.rh.toFixed(0)}%` : '—', out.dewPoint != null ? `Dew ${out.dewPoint.toFixed(0)}°F` : '', ''],
+                ['Wind',          out.wind != null ? `${out.wind.toFixed(0)} mph` : '—', out.gust != null ? `Gust ${out.gust.toFixed(0)}` : '', flagForOutdoor('gust', out.gust)],
+                ['Precipitation', out.precip != null ? `${out.precip.toFixed(2)}″` : '—', '', flagForOutdoor('precip', out.precip)],
+                ['Cloud cover',   out.cloud != null ? `${out.cloud.toFixed(0)}%` : '—', '', ''],
+                ['PM2.5',         out.pm25 != null ? `${out.pm25.toFixed(0)} µg/m³` : '—', '', flagForOutdoor('pm25', out.pm25)],
+                ['PM10',          out.pm10 != null ? `${out.pm10.toFixed(0)} µg/m³` : '—', '', ''],
+                ['US AQI',        out.usAqi != null ? `${out.usAqi.toFixed(0)}` : '—', '', flagForOutdoor('aqi', out.usAqi)],
+                ['Ozone',         out.ozone != null ? `${out.ozone.toFixed(0)} µg/m³` : '—', '', flagForOutdoor('ozone', out.ozone)],
+            ];
+            if (out.pollen) {
+                const total = (out.pollen.grass||0)+(out.pollen.ragweed||0)+(out.pollen.birch||0)+(out.pollen.alder||0)+(out.pollen.olive||0)+(out.pollen.mugwort||0);
+                cards.push(['Pollen', `${total.toFixed(0)} grains/m³`, 'Combined', total > 50 ? 'flag-warn' : '']);
+            }
+            cards.forEach(([label, val, note, flag]) => {
+                const el = document.createElement('div');
+                el.className = 'metric' + (flag ? ' ' + flag : '');
+                el.innerHTML = `<div class="metric-label">${escapeHtml(label)}</div>
+                                <div class="metric-val">${escapeHtml(val)}</div>
+                                ${note ? `<div class="metric-note">${escapeHtml(note)}</div>` : ''}`;
+                grid.appendChild(el);
+            });
+            document.getElementById('outdoorCard').style.display = '';
+        }
+
+        function renderIndoor(indoor) {
+            const grid = document.getElementById('indoorMetrics');
+            grid.innerHTML = '';
+            const cards = [
+                ['Temperature', indoor.temp != null ? `${indoor.temp.toFixed(0)}°F` : '—', '', ''],
+                ['Humidity',    indoor.rh   != null ? `${indoor.rh.toFixed(0)}%`    : '—', '', indoor.rh != null && (indoor.rh > 60 || indoor.rh < 25) ? 'flag-warn' : ''],
+                ['CO₂',         indoor.co2  != null ? `${indoor.co2.toFixed(0)} ppm`: '—', '', indoor.co2 != null ? (indoor.co2 > 1000 ? 'flag-bad' : indoor.co2 > 800 ? 'flag-warn' : 'flag-good') : ''],
+                ['VOC',         indoor.voc  != null ? `${indoor.voc.toFixed(0)} ppb`: '—', '', indoor.voc != null ? (indoor.voc > 250 ? 'flag-bad' : indoor.voc > 150 ? 'flag-warn' : 'flag-good') : ''],
+                ['Radon',       indoor.radon!= null ? `${indoor.radon.toFixed(1)} pCi/L`: '—', 'EPA action 4', indoor.radon != null ? (indoor.radon > 4 ? 'flag-bad' : indoor.radon > 2 ? 'flag-warn' : 'flag-good') : ''],
+                ['PM2.5',       indoor.pm   != null ? `${indoor.pm.toFixed(0)} µg/m³`: '—', '', indoor.pm != null ? (indoor.pm > 12 ? 'flag-warn' : 'flag-good') : ''],
+            ];
+            cards.forEach(([label, val, note, flag]) => {
+                const el = document.createElement('div');
+                el.className = 'metric' + (flag ? ' ' + flag : '');
+                el.innerHTML = `<div class="metric-label">${escapeHtml(label)}</div>
+                                <div class="metric-val">${escapeHtml(val)}</div>
+                                ${note ? `<div class="metric-note">${escapeHtml(note)}</div>` : ''}`;
+                grid.appendChild(el);
+            });
+            const anyIndoor = Object.values(indoor).some(v => v != null);
+            document.getElementById('indoorCard').style.display = anyIndoor ? '' : 'none';
+        }
+
+        function pickHeadline(verdict, indoor, current) {
+            const inT = indoor.temp;
+            const outT = current.temp;
+            if (verdict === 'open') {
+                if (inT != null && outT != null && outT < inT - 2) return 'Open the windows — let the cool air in.';
+                if (inT != null && outT != null && outT > inT + 2) return 'Open the windows — warm air will work in your favor.';
+                if (indoor.co2 != null && indoor.co2 > 1000) return 'Open the windows — flush the stale air.';
+                return 'Open the windows — outdoor air is good.';
+            }
+            if (verdict === 'closed') return 'Keep them shut.';
+            return 'It\'s a coin flip — open if you want fresh air, but no big benefit.';
+        }
+
+        function showError(msg) {
+            const box = document.getElementById('errors');
+            const el = document.createElement('div');
+            el.className = 'error-box';
+            el.textContent = msg;
+            box.appendChild(el);
+        }
+        function clearErrors() { document.getElementById('errors').innerHTML = ''; }
+
+        // ---------- Orchestrator ----------
+        async function refresh() {
+            clearErrors();
+            document.getElementById('loading').style.display = '';
+            ['verdictCard','slotCard','hourCard','outdoorCard','indoorCard'].forEach(id => {
+                document.getElementById(id).style.display = 'none';
+            });
+
+            // Resolve location
+            let lat = state.lat, lon = state.lon;
+            if ((lat === '' || lon === '') && state.zip) {
+                try {
+                    const r = await zipToLatLon(state.zip);
+                    lat = r.lat; lon = r.lon;
+                    state.lat = lat; state.lon = lon;
+                    writeForm();
+                } catch (e) { showError('Could not look up that ZIP. Enter lat/lon instead.'); }
+            }
+            if (lat === '' || lon === '' || lat == null || lon == null) {
+                document.getElementById('loading').style.display = 'none';
+                showError('Set a location below — either a US ZIP or lat/lon — then press Save & refresh.');
+                return;
+            }
+
+            let weather, air;
+            try {
+                [weather, air] = await Promise.all([
+                    fetchWeather(lat, lon),
+                    fetchAir(lat, lon).catch(e => { showError('Air quality data unavailable: ' + e.message); return null; }),
+                ]);
+            } catch (e) {
+                document.getElementById('loading').style.display = 'none';
+                showError('Could not load outdoor data: ' + e.message);
+                return;
+            }
+
+            const placeLabel = await reverseLabel(lat, lon);
+            const current = currentOutdoor(weather, air);
+            const indoor = indoorFromState();
+            const prefs = prefsFromState();
+
+            const nowResult = scoreHour(current, indoor, prefs);
+            const headline = pickHeadline(nowResult.verdict, indoor, current);
+            const line = nowResult.verdict === 'open'
+                ? 'Conditions support venting your house right now.'
+                : nowResult.verdict === 'closed'
+                ? 'At least one factor below makes opening a bad idea right now.'
+                : 'Some pros, some cons. Read the factors and decide.';
+
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('verdictWhen').textContent =
+                'Right now · ' + new Date(current.time).toLocaleString();
+            setVerdict(nowResult.verdict, headline, line, nowResult.reasons);
+
+            // Hourly
+            const hours = weather.hourly.time;
+            const nowMs = Date.now();
+            const startIdx = Math.max(0, hours.findIndex(t => new Date(t).getTime() >= nowMs - 30 * 60 * 1000));
+            const scored = [];
+            for (let i = startIdx; i < startIdx + 24 && i < hours.length; i++) {
+                const h = hourFromIndex(weather, air, i);
+                scored.push({ hour: h, result: scoreHour(h, indoor, prefs) });
+            }
+            renderHourStrip(scored);
+            renderSlots(scored);
+            renderOutdoor(current, placeLabel);
+            renderIndoor(indoor);
+        }
+
+        // ---------- Event wiring ----------
+        document.getElementById('saveBtn').addEventListener('click', async () => {
+            readForm();
+            // If zip is set but lat/lon are not, resolve before saving
+            if (state.zip && (state.lat === '' || state.lon === '')) {
+                try {
+                    const r = await zipToLatLon(state.zip);
+                    state.lat = r.lat; state.lon = r.lon;
+                } catch (e) { /* surface in refresh */ }
+            }
+            saveState();
+            writeForm();
+            refresh();
+        });
+
+        document.getElementById('locBtn').addEventListener('click', async () => {
+            try {
+                const r = await browserGeolocate();
+                state.lat = Number(r.lat.toFixed(4));
+                state.lon = Number(r.lon.toFixed(4));
+                writeForm();
+                saveState();
+                refresh();
+            } catch (e) {
+                showError('Geolocation denied or unavailable. Enter a ZIP or lat/lon manually.');
+            }
+        });
+
+        // Auto-resolve ZIP on blur
+        document.getElementById('zip').addEventListener('blur', async (e) => {
+            const z = e.target.value.trim();
+            if (!z) return;
+            if (state.lat !== '' && state.lon !== '') return;
+            try {
+                const r = await zipToLatLon(z);
+                document.getElementById('lat').value = r.lat;
+                document.getElementById('lon').value = r.lon;
+            } catch (_) {}
+        });
+
+        // Init
+        writeForm();
+        renderSavedAt();
+        refresh();
+    })();
+    </script>
+</body>
+</html>

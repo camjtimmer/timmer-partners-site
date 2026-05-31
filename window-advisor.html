@@ -415,6 +415,29 @@
                             <option value="high">High — bad allergies</option>
                         </select>
                     </div>
+                    <div class="field">
+                        <label for="acSeasonStart">No-heat season from</label>
+                        <select id="acSeasonStart">
+                            <option value="1">January</option><option value="2">February</option>
+                            <option value="3">March</option><option value="4">April</option>
+                            <option value="5" selected>May</option><option value="6">June</option>
+                            <option value="7">July</option><option value="8">August</option>
+                            <option value="9">September</option><option value="10">October</option>
+                            <option value="11">November</option><option value="12">December</option>
+                        </select>
+                        <div class="hint">Cool outdoor air won't trigger a "keep closed" verdict in this range.</div>
+                    </div>
+                    <div class="field">
+                        <label for="acSeasonEnd">…through</label>
+                        <select id="acSeasonEnd">
+                            <option value="1">January</option><option value="2">February</option>
+                            <option value="3">March</option><option value="4">April</option>
+                            <option value="5">May</option><option value="6">June</option>
+                            <option value="7">July</option><option value="8" selected>August</option>
+                            <option value="9">September</option><option value="10">October</option>
+                            <option value="11">November</option><option value="12">December</option>
+                        </select>
+                    </div>
                 </div>
 
                 <div class="group-title">Airthings readings</div>
@@ -469,6 +492,7 @@
             lat: '', lon: '', zip: '',
             indoorMin: 66, indoorMax: 76, humidityMax: 55,
             allergy: 'med',
+            acSeasonStart: 5, acSeasonEnd: 8,
             inTemp: '', inRH: '', inCO2: '', inVOC: '', inRadon: '', inPM: '',
             savedAt: null,
         };
@@ -492,6 +516,7 @@
 
         // ---------- Form binding ----------
         const fields = ['lat','lon','zip','indoorMin','indoorMax','humidityMax','allergy',
+                        'acSeasonStart','acSeasonEnd',
                         'inTemp','inRH','inCO2','inVOC','inRadon','inPM'];
         function readForm() {
             fields.forEach(f => {
@@ -662,21 +687,27 @@
             const inT = indoor.temp;
             const outT = outdoor.temp;
 
+            const hourMonth = (outdoor.time ? new Date(outdoor.time) : new Date()).getMonth() + 1;
+            const noHeatSeason = monthInRange(hourMonth, prefs.acSeasonStart, prefs.acSeasonEnd);
+
             if (outT != null) {
                 if (inT != null) {
                     if (inT > targetMax && outT < inT - 2 && outT < targetMax + 2) {
                         thermal = 'cool';
                         reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is ${(inT - outT).toFixed(0)}°F cooler than indoor — free cooling.` });
-                    } else if (inT < targetMin && outT > inT + 2 && outT < targetMax) {
+                    } else if (!noHeatSeason && inT < targetMin && outT > inT + 2 && outT < targetMax) {
                         thermal = 'warm';
                         reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is warmer than indoor (${inT.toFixed(0)}°F) — free warming toward your target.` });
-                    } else if (inT >= targetMin && inT <= targetMax && outT >= targetMin && outT <= targetMax) {
+                    } else if (outT >= targetMin && outT <= targetMax) {
                         thermal = 'neutral';
                         reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is in your comfort range.` });
                     } else if (inT <= targetMax && outT > targetMax + 3) {
                         thermal = 'penalty';
                         reasons.push({ kind: 'bad', text: `Outdoor ${outT.toFixed(0)}°F would heat you up — you'd lose AC.` });
                         verdict = 'closed';
+                    } else if (noHeatSeason && outT < targetMin) {
+                        thermal = 'cool';
+                        reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is cool — heat is off this time of year, so it's free fresh air with no energy penalty.` });
                     } else if (inT >= targetMin && outT < targetMin - 5) {
                         thermal = 'penalty';
                         reasons.push({ kind: 'bad', text: `Outdoor ${outT.toFixed(0)}°F would chill you — you'd lose heat.` });
@@ -691,6 +722,9 @@
                         reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is in your comfort range.` });
                     } else if (outT > targetMax) {
                         reasons.push({ kind: 'warn', text: `Outdoor ${outT.toFixed(0)}°F is above your max (${targetMax}°F).` });
+                    } else if (noHeatSeason) {
+                        thermal = 'neutral';
+                        reasons.push({ kind: 'good', text: `Outdoor ${outT.toFixed(0)}°F is cool — heat is off this season, so opening is fine.` });
                     } else {
                         reasons.push({ kind: 'warn', text: `Outdoor ${outT.toFixed(0)}°F is below your min (${targetMin}°F).` });
                     }
@@ -800,7 +834,16 @@
                 indoorMax: Number(state.indoorMax) || 76,
                 humidityMax: Number(state.humidityMax) || 55,
                 allergy: state.allergy || 'med',
+                acSeasonStart: Number(state.acSeasonStart) || 5,
+                acSeasonEnd: Number(state.acSeasonEnd) || 8,
             };
+        }
+
+        function monthInRange(m, start, end) {
+            start = Number(start); end = Number(end);
+            if (!start || !end) return false;
+            if (start <= end) return m >= start && m <= end;
+            return m >= start || m <= end; // wraps year, e.g. Nov–Mar
         }
 
         // ---------- Rendering ----------
@@ -955,11 +998,14 @@
             document.getElementById('indoorCard').style.display = anyIndoor ? '' : 'none';
         }
 
-        function pickHeadline(verdict, indoor, current) {
+        function pickHeadline(verdict, indoor, current, prefs) {
             const inT = indoor.temp;
             const outT = current.temp;
+            const month = new Date().getMonth() + 1;
+            const noHeat = monthInRange(month, prefs.acSeasonStart, prefs.acSeasonEnd);
             if (verdict === 'open') {
                 if (inT != null && outT != null && outT < inT - 2) return 'Open the windows — let the cool air in.';
+                if (noHeat && outT != null && outT < prefs.indoorMin) return 'Open the windows — cool air is free this time of year.';
                 if (inT != null && outT != null && outT > inT + 2) return 'Open the windows — warm air will work in your favor.';
                 if (indoor.co2 != null && indoor.co2 > 1000) return 'Open the windows — flush the stale air.';
                 return 'Open the windows — outdoor air is good.';
@@ -1019,7 +1065,7 @@
             const prefs = prefsFromState();
 
             const nowResult = scoreHour(current, indoor, prefs);
-            const headline = pickHeadline(nowResult.verdict, indoor, current);
+            const headline = pickHeadline(nowResult.verdict, indoor, current, prefs);
             const line = nowResult.verdict === 'open'
                 ? 'Conditions support venting your house right now.'
                 : nowResult.verdict === 'closed'

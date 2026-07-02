@@ -520,23 +520,25 @@ nav {
 .tenant-row {
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
-    gap: 36px 64px;
+    align-items: baseline;
+    row-gap: 16px;
+    max-width: 980px;
 }
-.tenant-logo-link {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
-    line-height: 0;
+.tenant-row > a,
+.tenant-row > span {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    color: var(--text-2);
+    line-height: 1.5;
+    white-space: nowrap;
 }
-.tenant-logo {
-    height: 44px;
-    width: auto;
-    max-width: 150px;
-    object-fit: contain;
-    transition: transform var(--t-med);
+.tenant-row > a { transition: color var(--t-fast); }
+.tenant-row > a:hover { color: var(--forest); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--bronze); }
+.tenant-row > *:not(:last-child)::after {
+    content: "\00B7";
+    margin: 0 16px;
+    color: var(--bronze);
 }
-.tenant-logo-link:hover .tenant-logo { transform: scale(1.05); }
 
 /* ---------- Broker callout ---------- */
 .broker-callout {
@@ -1167,8 +1169,8 @@ footer {
     .portfolio-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
     .portfolio-page .portfolio-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
     .footer-cta-buttons { flex-direction: column; align-items: stretch; }
-    .tenant-row { gap: 28px 44px; }
-    .tenant-logo { height: 36px; }
+    .tenant-row > a, .tenant-row > span { font-size: 0.98rem; }
+    .tenant-row > *:not(:last-child)::after { margin: 0 12px; }
     .portfolio-hero-stats { gap: 32px; flex-wrap: wrap; }
     .portfolio-hero-stat .num { font-size: 1.8rem; }
 }

@@ -36,6 +36,6 @@ git push
 ## Notes
 
 - No build step — pure HTML/CSS/JS
-- Tenant logos come from [logo.dev](https://logo.dev) (attribution link in the footer is required by their free tier); each `<img>` has an `onerror` fallback that hides it if the CDN fails
+- Tenant strip is plain text names (no external logo service)
 - All property photos are hosted locally in `photos/`
 - Custom domain (timmerpartners.com) not yet attached — canonical/OG URLs already point at it

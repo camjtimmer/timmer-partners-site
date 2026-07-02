@@ -6,18 +6,19 @@
     <title>Investment Portfolio | Timmer Partners</title>
     <meta name="description" content="Browse the investment portfolio of Timmer Partners — 57 industrial and commercial properties acquired across 16 states.">
     <meta name="theme-color" content="#16301F">
+    <link rel="canonical" href="https://timmerpartners.com/portfolio.html">
 
     <!-- Open Graph / Twitter -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://timmerpartners.com/portfolio.html">
     <meta property="og:title" content="Investment Portfolio | Timmer Partners">
     <meta property="og:description" content="57 industrial and commercial properties acquired by Timmer Partners across 16 states.">
-    <meta property="og:image" content="https://timmerpartners.com/hero-industrial.jpg">
+    <meta property="og:image" content="https://timmerpartners.com/og-image.jpg">
     <meta property="og:site_name" content="Timmer Partners">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Investment Portfolio | Timmer Partners">
     <meta name="twitter:description" content="57 industrial and commercial properties across 16 states.">
-    <meta name="twitter:image" content="https://timmerpartners.com/hero-industrial.jpg">
+    <meta name="twitter:image" content="https://timmerpartners.com/og-image.jpg">
 
     <link rel="icon" type="image/svg+xml" href="brand/brand-favicon.svg">
     <link rel="apple-touch-icon" href="brand/apple-touch-icon.png">
@@ -26,7 +27,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
 </head>
 <body>
 
@@ -83,24 +84,24 @@
     <!-- FILTERS -->
     <section class="portfolio-filters">
         <div class="container">
-            <div class="portfolio-filters-inner" id="filterChips" role="tablist" aria-label="Filter portfolio by state">
-                <button class="filter-chip active" data-filter="all" role="tab" aria-selected="true">All <span class="count" id="count-all"></span></button>
-                <button class="filter-chip" data-filter="MI" role="tab">Michigan <span class="count" data-count="MI"></span></button>
-                <button class="filter-chip" data-filter="KY" role="tab">Kentucky <span class="count" data-count="KY"></span></button>
-                <button class="filter-chip" data-filter="OH" role="tab">Ohio <span class="count" data-count="OH"></span></button>
-                <button class="filter-chip" data-filter="IN" role="tab">Indiana <span class="count" data-count="IN"></span></button>
-                <button class="filter-chip" data-filter="IL" role="tab">Illinois <span class="count" data-count="IL"></span></button>
-                <button class="filter-chip" data-filter="GA" role="tab">Georgia <span class="count" data-count="GA"></span></button>
-                <button class="filter-chip" data-filter="TX" role="tab">Texas <span class="count" data-count="TX"></span></button>
-                <button class="filter-chip" data-filter="AL" role="tab">Alabama <span class="count" data-count="AL"></span></button>
-                <button class="filter-chip" data-filter="NY" role="tab">New York <span class="count" data-count="NY"></span></button>
-                <button class="filter-chip" data-filter="PA" role="tab">Pennsylvania <span class="count" data-count="PA"></span></button>
-                <button class="filter-chip" data-filter="NJ" role="tab">New Jersey <span class="count" data-count="NJ"></span></button>
-                <button class="filter-chip" data-filter="NH" role="tab">New Hampshire <span class="count" data-count="NH"></span></button>
-                <button class="filter-chip" data-filter="SC" role="tab">South Carolina <span class="count" data-count="SC"></span></button>
-                <button class="filter-chip" data-filter="TN" role="tab">Tennessee <span class="count" data-count="TN"></span></button>
-                <button class="filter-chip" data-filter="FL" role="tab">Florida <span class="count" data-count="FL"></span></button>
-                <button class="filter-chip" data-filter="OK" role="tab">Oklahoma <span class="count" data-count="OK"></span></button>
+            <div class="portfolio-filters-inner" id="filterChips" aria-label="Filter portfolio by state">
+                <button class="filter-chip active" data-filter="all" aria-pressed="true">All <span class="count" id="count-all"></span></button>
+                <button class="filter-chip" data-filter="MI" aria-pressed="false">Michigan <span class="count" data-count="MI"></span></button>
+                <button class="filter-chip" data-filter="KY" aria-pressed="false">Kentucky <span class="count" data-count="KY"></span></button>
+                <button class="filter-chip" data-filter="OH" aria-pressed="false">Ohio <span class="count" data-count="OH"></span></button>
+                <button class="filter-chip" data-filter="IN" aria-pressed="false">Indiana <span class="count" data-count="IN"></span></button>
+                <button class="filter-chip" data-filter="IL" aria-pressed="false">Illinois <span class="count" data-count="IL"></span></button>
+                <button class="filter-chip" data-filter="GA" aria-pressed="false">Georgia <span class="count" data-count="GA"></span></button>
+                <button class="filter-chip" data-filter="TX" aria-pressed="false">Texas <span class="count" data-count="TX"></span></button>
+                <button class="filter-chip" data-filter="AL" aria-pressed="false">Alabama <span class="count" data-count="AL"></span></button>
+                <button class="filter-chip" data-filter="NY" aria-pressed="false">New York <span class="count" data-count="NY"></span></button>
+                <button class="filter-chip" data-filter="PA" aria-pressed="false">Pennsylvania <span class="count" data-count="PA"></span></button>
+                <button class="filter-chip" data-filter="NJ" aria-pressed="false">New Jersey <span class="count" data-count="NJ"></span></button>
+                <button class="filter-chip" data-filter="NH" aria-pressed="false">New Hampshire <span class="count" data-count="NH"></span></button>
+                <button class="filter-chip" data-filter="SC" aria-pressed="false">South Carolina <span class="count" data-count="SC"></span></button>
+                <button class="filter-chip" data-filter="TN" aria-pressed="false">Tennessee <span class="count" data-count="TN"></span></button>
+                <button class="filter-chip" data-filter="FL" aria-pressed="false">Florida <span class="count" data-count="FL"></span></button>
+                <button class="filter-chip" data-filter="OK" aria-pressed="false">Oklahoma <span class="count" data-count="OK"></span></button>
             </div>
         </div>
     </section>
@@ -720,9 +721,9 @@
 
         chips.forEach(chip => {
             chip.addEventListener('click', () => {
-                chips.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-selected', 'false'); });
+                chips.forEach(c => { c.classList.remove('active'); c.setAttribute('aria-pressed', 'false'); });
                 chip.classList.add('active');
-                chip.setAttribute('aria-selected', 'true');
+                chip.setAttribute('aria-pressed', 'true');
                 const filter = chip.dataset.filter;
                 let visible = 0;
                 cards.forEach(card => {

@@ -98,6 +98,20 @@ img, svg { max-width: 100%; display: block; }
 a { text-decoration: none; color: inherit; }
 button { font: inherit; cursor: pointer; }
 
+/* Anchor targets clear the fixed header */
+section[id] { scroll-margin-top: 96px; }
+
+/* Keyboard focus + selection, on brand */
+:focus-visible {
+    outline: 2px solid var(--bronze);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+::selection {
+    background: rgba(138, 109, 50, 0.22);
+    color: var(--forest);
+}
+
 /* ---------- Utilities ---------- */
 .container { max-width: var(--container); margin: 0 auto; padding: 0 24px; }
 
@@ -110,7 +124,7 @@ button { font: inherit; cursor: pointer; }
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--warm-gray);
+    color: var(--warm-gray-2);
     margin-bottom: 20px;
 }
 .section-label::before {
@@ -377,7 +391,6 @@ nav {
     padding: 0 24px;
     box-sizing: border-box;
 }
-.hero-bg::after { content: none !important; display: none !important; }
 .hero-bg img {
     width: 100%;
     aspect-ratio: 21 / 9;
@@ -385,8 +398,6 @@ nav {
     border-radius: var(--radius);
     box-shadow: var(--shadow-lg);
     filter: saturate(0.88) brightness(0.96);
-    animation: none !important;
-    transform: none !important;
 }
 .hero-content {
     max-width: 920px;
@@ -403,7 +414,7 @@ nav {
     font-weight: 600;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--warm-gray);
+    color: var(--warm-gray-2);
     margin-bottom: 32px;
     padding: 0;
     border: none;
@@ -454,7 +465,6 @@ nav {
     position: relative;
     overflow: hidden;
 }
-.stats-bar::before { content: none; }
 .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -488,7 +498,7 @@ nav {
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--warm-gray);
+    color: var(--warm-gray-2);
 }
 
 /* ---------- Tenant strip ---------- */
@@ -504,7 +514,7 @@ nav {
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--warm-gray);
+    color: var(--warm-gray-2);
     margin-bottom: 36px;
 }
 .tenant-row {
@@ -979,7 +989,6 @@ footer {
     position: relative;
     overflow: hidden;
 }
-.portfolio-hero::before { content: none; }
 .portfolio-hero .section-label { color: var(--warm-gray); }
 .portfolio-hero h1 {
     font-family: var(--font-serif);
@@ -1020,7 +1029,7 @@ footer {
     font-weight: 600;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--warm-gray);
+    color: var(--warm-gray-2);
     margin-top: 12px;
 }
 

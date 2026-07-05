@@ -154,21 +154,19 @@ section[id] { scroll-margin-top: 96px; }
 .text-center { text-align: center; }
 .mx-auto { margin-left: auto; margin-right: auto; }
 
-/* Editorial section header: label + heading left, supporting copy right */
+/* Section header: heading with lede stacked below, left-aligned */
 .section-head {
-    display: grid;
-    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
-    gap: 24px 80px;
-    align-items: end;
-    margin-bottom: 64px;
+    margin-bottom: 56px;
+    max-width: 720px;
 }
 .section-head .section-heading { margin-bottom: 0; }
-.section-side {
+.section-lede {
     font-family: var(--font-serif);
     font-size: 1.02rem;
     color: var(--text-2);
     line-height: 1.68;
-    padding-bottom: 6px;
+    margin-top: 16px;
+    max-width: 62ch;
 }
 
 /* ---------- Buttons ---------- */
@@ -518,11 +516,10 @@ nav {
     margin-bottom: 36px;
 }
 .tenant-row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: baseline;
-    row-gap: 16px;
-    max-width: 980px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px 48px;
+    max-width: 1080px;
 }
 .tenant-row > a,
 .tenant-row > span {
@@ -530,15 +527,9 @@ nav {
     font-size: 1.05rem;
     color: var(--text-2);
     line-height: 1.5;
-    white-space: nowrap;
 }
 .tenant-row > a { transition: color var(--t-fast); }
 .tenant-row > a:hover { color: var(--forest); text-decoration: underline; text-underline-offset: 4px; text-decoration-color: var(--bronze); }
-.tenant-row > *:not(:last-child)::after {
-    content: "\00B7";
-    margin: 0 16px;
-    color: var(--bronze);
-}
 
 /* ---------- Broker callout ---------- */
 .broker-callout {
@@ -811,12 +802,7 @@ nav {
     background: var(--forest);
     color: var(--warm-white);
 }
-.footer-cta-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1.6fr) auto;
-    gap: 40px 80px;
-    align-items: center;
-}
+.footer-cta-inner { max-width: 720px; }
 .footer-cta h2 {
     font-family: var(--font-serif);
     font-size: clamp(2rem, 3.8vw, 2.8rem);
@@ -835,9 +821,9 @@ nav {
 }
 .footer-cta-buttons {
     display: flex;
-    flex-direction: column;
     gap: 14px;
-    align-items: stretch;
+    flex-wrap: wrap;
+    margin-top: 36px;
 }
 
 /* ---------- Footer ---------- */
@@ -1142,16 +1128,13 @@ footer {
     .hero { padding: 148px 0 80px; }
     .hero-bg { margin-top: 48px; }
     .hero-bg img { aspect-ratio: 4 / 3; }
-    .section-head { grid-template-columns: 1fr; align-items: start; gap: 18px; margin-bottom: 48px; }
-    .section-side { padding-bottom: 0; }
+    .section-head { margin-bottom: 44px; }
     .stats-grid { grid-template-columns: 1fr; gap: 40px; }
     .steps-grid { grid-template-columns: 1fr; gap: 56px; }
     .solution-row { grid-template-columns: 56px minmax(0, 1fr); gap: 10px 24px; }
     .solution-row p { grid-column: 2; }
     .broker-inner { grid-template-columns: 1fr; }
     .quote-grid { grid-template-columns: 1fr; gap: 40px; }
-    .footer-cta-inner { grid-template-columns: 1fr; }
-    .footer-cta-buttons { flex-direction: row; flex-wrap: wrap; }
     .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
     .portfolio-page .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
     .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
@@ -1163,14 +1146,12 @@ footer {
 }
 @media (max-width: 600px) {
     .hero h1 { letter-spacing: -0.012em; }
-    .hero h1 br { display: none; }
     .hero-buttons { flex-direction: column; align-items: stretch; }
     .btn { justify-content: center; }
     .portfolio-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
     .portfolio-page .portfolio-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
     .footer-cta-buttons { flex-direction: column; align-items: stretch; }
     .tenant-row > a, .tenant-row > span { font-size: 0.98rem; }
-    .tenant-row > *:not(:last-child)::after { margin: 0 12px; }
     .portfolio-hero-stats { gap: 32px; flex-wrap: wrap; }
     .portfolio-hero-stat .num { font-size: 1.8rem; }
 }

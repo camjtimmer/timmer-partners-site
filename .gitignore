@@ -8,3 +8,6 @@ previews/
 
 # Local Netlify folder
 .netlify
+
+# Wrangler local cache
+.wrangler/
